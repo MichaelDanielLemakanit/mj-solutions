@@ -33,5 +33,6 @@ def software():
 def user_profile(username):
     return f"<h1>Welcome to {username}'s profile!</h1>"
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)
+app = app
