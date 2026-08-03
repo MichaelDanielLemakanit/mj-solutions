@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Devices & Retail | MJ Solutions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-badge">MJ</div>
+            <div class="brand-name">
+                <h2>MJ SOLUTIONS</h2>
+                <p>PRINTING, SOFTWARE & BEAUTY</p>
+            </div>
+        </div>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="#products">Beauty Catalog</a>
+            <a href="#online-shops">Where to Buy</a>
+            <a href="#store-location">Physical Shop</a>
+            <a href="#order-form">Place Order</a>
+        </nav>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <h1>BEAUTY DEVICES & <span>RETAIL</span></h1>
+        <p>Smart electronic beauty gadgets, personal care devices, facial care tech, and premium grooming accessories.</p>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section id="products" class="printing-catalog">
+        <h2>Popular Beauty & Personal Care Tech</h2>
+        <div class="catalog-grid">
+
+            <div class="catalog-card" onclick="selectProduct('Sonic Facial Cleansing Brush', 2500)">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h3>Sonic Facial Cleanser</h3>
+                <p>Deep pore cleansing silicone massage brush with adjustable vibration speeds.</p>
+                <span class="price-tag">KSh 2,500</span>
+                <button class="select-btn">Select & Buy</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectProduct('LED Light Therapy Mask', 6500)">
+                <i class="fa-solid fa-face-smile"></i>
+                <h3>LED Facial Therapy Mask</h3>
+                <p>7-color light therapy for acne treatment, skin tightening, and rejuvenation.</p>
+                <span class="price-tag">KSh 6,500</span>
+                <button class="select-btn">Select & Buy</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectProduct('Ultrasonic Skin Scrubber', 3200)">
+                <i class="fa-solid fa-gem"></i>
+                <h3>Ultrasonic Skin Scrubber</h3>
+                <p>Deep blackhead removal, exfoliation, and serum absorption tool.</p>
+                <span class="price-tag">KSh 3,200</span>
+                <button class="select-btn">Select & Buy</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectProduct('Pro Hair Trimmer & Styling Set', 3800)">
+                <i class="fa-solid fa-scissors"></i>
+                <h3>Pro Hair Trimmer Set</h3>
+                <p>Cordless rechargeable high-precision hair & beard grooming kit.</p>
+                <span class="price-tag">KSh 3,800</span>
+                <button class="select-btn">Select & Buy</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectProduct('IPL Hair Removal Handset', 8500)">
+                <i class="fa-solid fa-bolt"></i>
+                <h3>Laser IPL Hair Remover</h3>
+                <p>Permanent painless laser hair removal device for full body smoothing.</p>
+                <span class="price-tag">KSh 8,500</span>
+                <button class="select-btn">Select & Buy</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectProduct('Hot Air Hair Styler & Dryer', 4200)">
+                <i class="fa-solid fa-wind"></i>
+                <h3>Multifunctional Hair Styler</h3>
+                <p>5-in-1 hot air blow dryer, volumizer, and curling wand set.</p>
+                <span class="price-tag">KSh 4,200</span>
+                <button class="select-btn">Select & Buy</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Online Retail Platforms Section -->
+    <section id="online-shops" class="retail-platforms-section">
+        <h2>Buy MJ Beauty Products Online</h2>
+        <p class="section-sub">Shop our official products on your favorite online marketplaces with fast nationwide delivery.</p>
+
+        <div class="platform-grid">
+            <a href="https://mj-grocery-aso3.vercel.app/" class="platform-card official-store">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <h3>MJ Solutions Web Store</h3>
+                <p>Buy directly from us with fast order processing and M-Pesa options.</p>
+                <span class="platform-btn">Visit Website Store <i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+
+            <a href="https://www.jumia.co.ke/jolene/?sort=rating#catalog-listing" target="_blank" class="platform-card jumia">
+                <i class="fa-solid fa-store"></i>
+                <h3>Jumia Kenya</h3>
+                <p>Shop our official Jumia storefront for verified products & door delivery.</p>
+                <span class="platform-btn">Shop on Jumia <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+            </a>
+
+            <a href="https://www.jumia.co.ke/jolene/?sort=rating#catalog-listing" target="_blank" class="platform-card kilimall">
+                <i class="fa-solid fa-cart-flatbed"></i>
+                <h3>Kilimall Marketplace</h3>
+                <p>Order beauty gadgets with convenient pickup station delivery nationwide.</p>
+                <span class="platform-btn">Shop on Kilimall <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+            </a>
+
+            <a href="https://www.tiktok.com/@mj.solutions" target="_blank" class="platform-card tiktok-shop">
+                <i class="fa-brands fa-tiktok"></i>
+                <h3>TikTok Shop & Social</h3>
+                <p>Watch live product demos and order directly via our social channels.</p>
+                <span class="platform-btn">Explore TikTok Shop <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Physical Location Section -->
+    <section id="store-location" class="location-section">
+        <h2>Visit Our Physical Shop</h2>
+        <p class="section-sub">Walk in to test our beauty devices and buy directly over the counter.</p>
+
+        <div class="location-container">
+            <div class="location-info">
+                <div class="info-block">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <h4>Shop Address</h4>
+                        <p>MJ Solutions Center, Tom Mboya Street / CBD, Nairobi, Kenya</p>
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <i class="fa-solid fa-clock"></i>
+                    <div>
+                        <h4>Working Hours</h4>
+                        <p>Monday – Saturday: 8:00 AM – 6:30 PM<br>Sunday & Holidays: Closed</p>
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <i class="fa-solid fa-headset"></i>
+                    <div>
+                        <h4>Customer Care & Pickup Helpline</h4>
+                        <p>Phone: 0756295128 / 0717434845<br>Email: michaellemakanit@gmail.com</p>
+                    </div>
+                </div>
+
+                <a href="https://maps.google.com/?q=Nairobi+CBD+Kenya" target="_blank" class="map-directions-btn">
+                    <i class="fa-solid fa-diamond-turn-right"></i> Open Location in Google Maps
+                </a>
+            </div>
+
+            <div class="map-wrapper">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.817282717013!2d36.821946!3d-1.286389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d68f237fef%3A0xb36a04803d15b22b!2sNairobi%20CBD!5e0!3m2!1sen!2ske!4v1700000000000!5m2!1sen!2ske" 
+                    width="100%" 
+                    height="320" 
+                    style="border:0; border-radius: 12px;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Beauty Order Form -->
+    <section id="order-form" class="order-section">
+        <h2>Order or Inquire via WhatsApp</h2>
+        <form class="order-container" onsubmit="submitBeautyOrder(event)">
+
+            <div class="form-group">
+                <label for="product-type">Selected Product / Item</label>
+                <select id="product-type" required onchange="updateBeautyPrice()">
+                    <option value="" disabled selected>Select a product from above or dropdown</option>
+                    <option value="Sonic Facial Cleanser" data-price="2500">Sonic Facial Cleanser (KSh 2,500)</option>
+                    <option value="LED Facial Therapy Mask" data-price="6500">LED Facial Therapy Mask (KSh 6,500)</option>
+                    <option value="Ultrasonic Skin Scrubber" data-price="3200">Ultrasonic Skin Scrubber (KSh 3,200)</option>
+                    <option value="Pro Hair Trimmer Set" data-price="3800">Pro Hair Trimmer Set (KSh 3,800)</option>
+                    <option value="Laser IPL Hair Remover" data-price="8500">Laser IPL Hair Remover (KSh 8,500)</option>
+                    <option value="Multifunctional Hair Styler" data-price="4200">Multifunctional Hair Styler (KSh 4,200)</option>
+                    <option value="Other Beauty Device" data-price="0">Other / Custom Product Inquiry</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" min="1" value="1" required oninput="updateBeautyPrice()">
+                </div>
+                <div class="form-group">
+                    <label for="delivery-option">Fulfillment Option</label>
+                    <select id="delivery-option">
+                        <option value="Doorstep Delivery (Nairobi)">Doorstep Delivery (Nairobi)</option>
+                        <option value="Upcountry Parcel Courier">Upcountry Parcel Courier (Fargo/G4S/Speedaf)</option>
+                        <option value="Physical Shop Pick-up">Pick Up at Physical Shop (CBD)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Additional Notes / Delivery Address</label>
+                <textarea id="notes" rows="3" placeholder="Specify color preference, delivery location details, or custom questions..."></textarea>
+            </div>
+
+            <hr class="form-divider">
+
+            <h3>Customer Contact Details</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="client-name">Full Name</label>
+                    <input type="text" id="client-name" placeholder="Jacqueline Shirumbi" required>
+                </div>
+                <div class="form-group">
+                    <label for="client-phone">Phone Number</label>
+                    <input type="tel" id="client-phone" placeholder="0756295128" required>
+                </div>
+            </div>
+
+            <div class="price-summary">
+                <span>Estimated Total:</span>
+                <span id="total-price" class="total-amount">KSh 0</span>
+            </div>
+
+            <button type="submit" class="submit-btn"><i class="fa-brands fa-whatsapp"></i> Buy / Inquire via WhatsApp</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-info">
+            <div class="contact-item">
+                <i class="fa-solid fa-phone"></i>
+                <span>0756295128</span>
+            </div>
+            <div class="contact-item">
+                <i class="fa-solid fa-envelope"></i>
+                <span>michaellemakanit@gmail.com</span>
+            </div>
+            <div class="social-links">
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-tiktok"></i>
+                <span>mj.solutions</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        function selectProduct(productName) {
+            const selectElement = document.getElementById('product-type');
+            selectElement.value = productName;
+
+            document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' });
+            updateBeautyPrice();
+        }
+
+        function updateBeautyPrice() {
+            const selectElement = document.getElementById('product-type');
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const basePrice = selectedOption ? parseFloat(selectedOption.getAttribute('data-price')) || 0 : 0;
+            const quantity = parseInt(document.getElementById('quantity').value) || 1;
+
+            const total = basePrice * quantity;
+            document.getElementById('total-price').innerText = total > 0 ? 'KSh ' + total.toLocaleString() : 'Price on Request';
+        }
+
+        function submitBeautyOrder(event) {
+            event.preventDefault();
+
+            const product = document.getElementById('product-type').value;
+            const quantity = document.getElementById('quantity').value;
+            const delivery = document.getElementById('delivery-option').value;
+            const notes = document.getElementById('notes').value;
+            const name = document.getElementById('client-name').value;
+            const phone = document.getElementById('client-phone').value;
+            const total = document.getElementById('total-price').innerText;
+
+            if (!product) {
+                alert('Please select a product first.');
+                return;
+            }
+
+            const rawMessage = `Hello MJ Solutions!\n\n` +
+                `*New Beauty Product Order / Inquiry*\n` +
+                `• *Product:* ${product}\n` +
+                `• *Quantity:* ${quantity}\n` +
+                `• *Fulfillment:* ${delivery}\n` +
+                `• *Total Price:* ${total}\n\n` +
+                `*Customer Details:*\n` +
+                `• *Name:* ${name}\n` +
+                `• *Phone:* ${phone}\n` +
+                `• *Notes/Address:* ${notes || 'None'}`;
+
+            const whatsappPhone = "254756295128";
+            window.open(`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(rawMessage)}`, '_blank');
+        }
+    </script>
+</body>
+
+</html>

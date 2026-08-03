@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MJ Solutions - Printing, Software & Tech</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-badge">MJ</div>
+            <div class="brand-name">
+                <h2>MJ SOLUTIONS</h2>
+                <p>PRINTING, SOFTWARE & TECH</p>
+            </div>
+        </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>INTEGRATED <span>SOLUTIONS</span></h1>
+            <p>• For Printing & Software<br>• Plus Tech-Beauty Retail<br>• Efficiency & Beauty</p>
+            <a href="#services" class="btn">Explore Services</a>
+        </div>
+
+        <!-- Interactive Wheel Feature -->
+        <div class="wheel-container">
+            <div class="service-wheel">
+                <div class="wheel-center">
+                    <h3>MJ</h3>
+                    <p>SOLUTIONS</p>
+                </div>
+                <div class="wheel-item" style="--i: 0;"><i class="fa-solid fa-print"></i><span>Printing</span></div>
+                <div class="wheel-item" style="--i: 1;"><i class="fa-solid fa-code"></i><span>Software</span></div>
+                <div class="wheel-item" style="--i: 2;"><i class="fa-solid fa-globe"></i><span>Web</span></div>
+                <div class="wheel-item" style="--i: 3;"><i
+                        class="fa-solid fa-wand-magic-sparkles"></i><span>Beauty</span></div>
+                <div class="wheel-item" style="--i: 4;"><i class="fa-solid fa-mobile-screen"></i><span>Apps</span></div>
+                <div class="wheel-item" style="--i: 5;"><i class="fa-solid fa-lightbulb"></i><span>Innovation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section">
+        <h2>Our Core Services</h2>
+        <div class="services-grid">
+            <a href="{{ url_for('printing') }}" style="text-decoration: none; color: inherit;">
+                <div class="service-card">
+                    <i class="fa-solid fa-print"></i>
+                    <h3>Printing & Design</h3>
+                    <p>Large format printing, branding, apparel customization, flyers, and business stationery.</p>
+                </div>
+            </a>
+            <a href="{{ url_for('software') }}" style="text-decoration: none; color: inherit;">
+                <div class="service-card">
+                    <i class="fa-solid fa-code"></i>
+                    <h3>Software & Web Development</h3>
+                    <p>Custom software architecture, responsive web applications, and database solutions.</p>
+                </div>
+            </a>
+            <a href="{{ url_for('beauty') }}" style="text-decoration: none; color: inherit;">
+                <div class="service-card">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <h3>Beauty Devices & Retail</h3>
+                    <p>Smart electronic beauty gadgets, personal care devices, and high-tech retail products.</p>
+                </div>
+            </a>
+            <a href="{{ url_for('app_page') }}" style="text-decoration: none; color: inherit;">
+                <div class="service-card">
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    <h3>App Solutions</h3>
+                    <p>Tailored cross-platform mobile apps to streamline and grow your modern business network.</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer / Contact Bar -->
+    <footer id="contact">
+        <div class="footer-info">
+            <div class="contact-item">
+                <i class="fa-solid fa-phone"></i>
+                <span>0756295128</span>
+            </div>
+            <div class="contact-item">
+                <i class="fa-solid fa-envelope"></i>
+                <span>michaellemakanit@gmail.com</span>
+            </div>
+            <div class="social-links">
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-tiktok"></i>
+                <span>mj.solutions</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Solutions | MJ Solutions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-badge">MJ</div>
+            <div class="brand-name">
+                <h2>MJ SOLUTIONS</h2>
+                <p>PRINTING, SOFTWARE & TECH</p>
+            </div>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#services">App Services</a>
+            <a href="#portfolio">Our Apps</a>
+            <a href="#app-quote-form">Request App Quote</a>
+        </nav>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <h1>APP <span>SOLUTIONS</span></h1>
+        <p>Tailored cross-platform mobile apps to streamline and grow your modern business network.</p>
+    </section>
+
+    <!-- Mobile App Services Catalog -->
+    <section id="services" class="printing-catalog">
+        <h2>Mobile Development Services</h2>
+        <div class="catalog-grid">
+
+            <div class="catalog-card" onclick="selectAppService('Android App Development')">
+                <i class="fa-brands fa-android"></i>
+                <h3>Android App Development</h3>
+                <p>Native & cross-platform Android applications optimized for high performance across all mobile
+                    devices.</p>
+                <span class="price-tag">Custom Quote</span>
+                <button class="select-btn">Select & Request</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectAppService('iOS App Development')">
+                <i class="fa-brands fa-apple"></i>
+                <h3>iOS App Development</h3>
+                <p>Sleek, secure, and user-friendly iPhone and iPad applications tailored for the Apple ecosystem.</p>
+                <span class="price-tag">Custom Quote</span>
+                <button class="select-btn">Select & Request</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectAppService('Cross-Platform Mobile Apps')">
+                <i class="fa-solid fa-mobile-screen"></i>
+                <h3>Cross-Platform Solutions</h3>
+                <p>Single codebase mobile apps built with React Native/Flutter that run seamlessly on both Android &
+                    iOS.</p>
+                <span class="price-tag">Custom Quote</span>
+                <button class="select-btn">Select & Request</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectAppService('E-Commerce & Retail Mobile Apps')">
+                <i class="fa-solid fa-cart-flatbed"></i>
+                <h3>E-Commerce Mobile Apps</h3>
+                <p>Dedicated shopping apps with M-Pesa/Card payments, push notifications, and real-time order tracking.
+                </p>
+                <span class="price-tag">Custom Quote</span>
+                <button class="select-btn">Select & Request</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectAppService('Business Utility & Portal Apps')">
+                <i class="fa-solid fa-briefcase"></i>
+                <h3>Business Utility & Tools</h3>
+                <p>Internal staff management, field tracking, reporting, and client service booking mobile tools.</p>
+                <span class="price-tag">Custom Quote</span>
+                <button class="select-btn">Select & Request</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectAppService('Mobile UI/UX Design & Prototyping')">
+                <i class="fa-solid fa-pen-ruler"></i>
+                <h3>Mobile UI/UX Design</h3>
+                <p>Wireframing, interactive Figma prototypes, and user interface design for new mobile app concepts.</p>
+                <span class="price-tag">Custom Quote</span>
+                <button class="select-btn">Select & Request</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- App Portfolio Section -->
+    <section id="portfolio" class="portfolio-section">
+        <h2>Featured MJ Mobile Solutions</h2>
+        <p class="section-sub">A glimpse into mobile applications, tools, and interfaces built by MJ Solutions.</p>
+
+        <div class="catalog-grid">
+
+            <div class="catalog-card portfolio-card">
+                <i class="fa-solid fa-shop"></i>
+                <h3>MJ Retail Express App</h3>
+                <p>Mobile storefront application with quick M-Pesa integration, instant cart sync, and direct WhatsApp
+                    receipting.</p>
+                <div class="tech-stack">
+                    <span>Flutter</span> <span>Dart</span> <span>REST API</span> <span>M-Pesa</span>
+                </div>
+                <a href="#" class="portfolio-link"><i class="fa-solid fa-mobile-button"></i> View App Demo</a>
+            </div>
+
+            <div class="catalog-card portfolio-card">
+                <i class="fa-solid fa-truck-fast"></i>
+                <h3>Logistics & Delivery Tracker</h3>
+                <p>Driver and customer mobile app featuring real-time GPS location updates and automated delivery
+                    notifications.</p>
+                <div class="tech-stack">
+                    <span>React Native</span> <span>Firebase</span> <span>Maps API</span>
+                </div>
+                <a href="#" class="portfolio-link"><i class="fa-solid fa-mobile-button"></i> View App Demo</a>
+            </div>
+
+            <div class="catalog-card portfolio-card">
+                <i class="fa-solid fa-calendar-check"></i>
+                <h3>Service Booking & Appointments</h3>
+                <p>Client booking app with calendar sync, automatic SMS reminders, and in-app service requests.</p>
+                <div class="tech-stack">
+                    <span>Android / iOS</span> <span>Python API</span> <span>SQL</span>
+                </div>
+                <a href="#" class="portfolio-link"><i class="fa-solid fa-mobile-button"></i> View App Demo</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- App Project Inquiry Form -->
+    <section id="app-quote-form" class="order-section">
+        <h2>Describe Your Mobile App Idea</h2>
+        <form class="order-container" onsubmit="submitAppRequest(event)">
+
+            <div class="form-group">
+                <label for="app-service-type">Primary App Service</label>
+                <select id="app-service-type" required>
+                    <option value="" disabled selected>Select an app development service</option>
+                    <option value="Android App Development">Android App Development</option>
+                    <option value="iOS App Development">iOS App Development</option>
+                    <option value="Cross-Platform Mobile Apps">Cross-Platform (Android & iOS)</option>
+                    <option value="E-Commerce & Retail Mobile Apps">E-Commerce Mobile App</option>
+                    <option value="Business Utility & Portal Apps">Business Utility / Internal Tool</option>
+                    <option value="Mobile UI/UX Design & Prototyping">Mobile UI/UX Design & Prototype</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="target-platform">Target Platform</label>
+                    <select id="target-platform">
+                        <option value="Android Only">Android Only</option>
+                        <option value="iOS Only">iOS (iPhone) Only</option>
+                        <option value="Both Android & iOS">Both Android & iOS</option>
+                        <option value="Web & Mobile Combined">Web + Mobile Combined</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="app-budget">Estimated Budget (KSh)</label>
+                    <input type="text" id="app-budget" placeholder="e.g., KSh 40,000 - 100,000">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="app-description">App Features & Description</label>
+                <textarea id="app-description" rows="4" required
+                    placeholder="Describe what your app should do, core features (e.g., user login, payment, push notifications), or reference apps you like..."></textarea>
+            </div>
+
+            <hr class="form-divider">
+
+            <h3>Client Contact Details</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="client-name">Full Name</label>
+                    <input type="text" id="client-name" placeholder="Daniel Michael" required>
+                </div>
+                <div class="form-group">
+                    <label for="client-phone">Phone Number</label>
+                    <input type="tel" id="client-phone" placeholder="0756295128" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="client-email">Email Address</label>
+                <input type="email" id="client-email" placeholder="name@example.com" required>
+            </div>
+
+            <button type="submit" class="submit-btn"><i class="fa-brands fa-whatsapp"></i> Request App Quote via
+                WhatsApp</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-info">
+            <div class="contact-item">
+                <i class="fa-solid fa-phone"></i>
+                <span>0756295128</span>
+            </div>
+            <div class="contact-item">
+                <i class="fa-solid fa-envelope"></i>
+                <span>michaellemakanit@gmail.com</span>
+            </div>
+            <div class="social-links">
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-tiktok"></i>
+                <span>mj.solutions</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        function selectAppService(serviceName) {
+            const selectElement = document.getElementById('app-service-type');
+            selectElement.value = serviceName;
+
+            // Smooth scroll down to requirement form
+            document.getElementById('app-quote-form').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function submitAppRequest(event) {
+            event.preventDefault();
+
+            // Collect form input values
+            const service = document.getElementById('app-service-type').value;
+            const platform = document.getElementById('target-platform').value;
+            const budget = document.getElementById('app-budget').value || 'Flexible / To be discussed';
+            const description = document.getElementById('app-description').value;
+            const name = document.getElementById('client-name').value;
+            const phone = document.getElementById('client-phone').value;
+            const email = document.getElementById('client-email').value;
+
+            // Construct message
+            const rawMessage = `Hello MJ Solutions!\n\n` +
+                `*New Mobile App Project Request*\n` +
+                `• *Service:* ${service}\n` +
+                `• *Platform:* ${platform}\n` +
+                `• *Estimated Budget:* ${budget}\n\n` +
+                `*App Description & Features:*\n${description}\n\n` +
+                `*Client Details:*\n` +
+                `• *Name:* ${name}\n` +
+                `• *Phone:* ${phone}\n` +
+                `• *Email:* ${email}`;
+
+            const whatsappPhone = "254756295128";
+            window.open(`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(rawMessage)}`, '_blank');
+        }
+    </script>
+</body>
+
+</html>

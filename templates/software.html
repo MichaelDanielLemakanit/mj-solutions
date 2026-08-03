@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software & Web Development | MJ Solutions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-badge">MJ</div>
+            <div class="brand-name">
+                <h2>MJ SOLUTIONS</h2>
+                <p>PRINTING, SOFTWARE & TECH</p>
+            </div>
+        </div>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="#services">Software Services</a>
+            <a href="#portfolio">Our Work</a>
+            <a href="#quote-form">Request Quote</a>
+        </nav>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <h1>SOFTWARE & <span>WEB DEVELOPMENT</span></h1>
+        <p>Custom web applications, e-commerce platforms, database management, and bespoke software solutions.</p>
+    </section>
+
+    <!-- Services Overview Section -->
+    <section id="services" class="printing-catalog">
+        <h2>Development Services</h2>
+        <div class="catalog-grid">
+
+            <div class="catalog-card" onclick="selectService('Full-Stack Web Application')">
+                <i class="fa-solid fa-code"></i>
+                <h3>Full-Stack Web Apps</h3>
+                <p>Dynamic, responsive web applications built with modern frameworks, API integration, and database backends.</p>
+                <span class="price-tag">Custom Quote</span>
+                <button class="select-btn">Select & Request</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectService('E-Commerce Storefront')">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <h3>E-Commerce Solutions</h3>
+                <p>Custom online stores, payment gateway integration (M-Pesa, Card), inventory tracking, and vendor dashboards.</p>
+                <span class="price-tag">Custom Quote</span>
+                <button class="select-btn">Select & Request</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectService('Mobile App Development')">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                <h3>Mobile Apps</h3>
+                <p>Tailored cross-platform mobile apps for Android and iOS to streamline business operations and customer reach.</p>
+                <span class="price-tag">Custom Quote</span>
+                <button class="select-btn">Select & Request</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectService('Database Architecture & APIs')">
+                <i class="fa-solid fa-database"></i>
+                <h3>Database & APIs</h3>
+                <p>Relational database setup, performance optimization, secure RESTful API development, and data migration.</p>
+                <span class="price-tag">Custom Quote</span>
+                <button class="select-btn">Select & Request</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectService('Business Automation Software')">
+                <i class="fa-solid fa-gears"></i>
+                <h3>Business Automation</h3>
+                <p>Custom internal tools, dashboard reporting, client portals, and workflow automation software.</p>
+                <span class="price-tag">Custom Quote</span>
+                <button class="select-btn">Select & Request</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectService('UI/UX & Web Redesign')">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h3>Web Redesign & UI/UX</h3>
+                <p>Modernize legacy platforms with clean interfaces, high performance, mobile optimization, and SEO readiness.</p>
+                <span class="price-tag">Custom Quote</span>
+                <button class="select-btn">Select & Request</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Featured Portfolio Section -->
+    <section id="portfolio" class="portfolio-section">
+        <h2>Featured MJ Solutions Projects</h2>
+        <p class="section-sub">Explore some of the web applications and software systems built by MJ Solutions.</p>
+        
+        <div class="catalog-grid">
+
+            <div class="catalog-card portfolio-card">
+                <i class="fa-solid fa-print"></i>
+                <h3>MJ Payslip Checker</h3>
+                <p>Integrated Web & Printing hub featuring automated pricing calculators, quote builders, and direct WhatsApp ordering.</p>
+                <div class="tech-stack">
+                    <span>HTML5</span> <span>CSS3</span> <span>JavaScript</span>
+                </div>
+                <a href="https://mjpayslipchecker.netlify.app/" target="_blank" class="portfolio-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Site</a>
+            </div>
+
+            <div class="catalog-card portfolio-card">
+                <i class="fa-solid fa-store"></i>
+                <h3>E-Commerce & Retail Platform</h3>
+                <p>Multi-vendor digital storefront featuring inventory control, real-time checkout, and responsive customer interface.</p>
+                <div class="tech-stack">
+                    <span>Python</span> <span>Flask</span> <span>SQL</span> <span>JS</span>
+                </div>
+                <a href="#" target="_blank" class="portfolio-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Demo</a>
+            </div>
+
+            <div class="catalog-card portfolio-card">
+                <i class="fa-solid fa-truck"></i>
+                <h3>MJ Delivery app</h3>
+                <p>Custom administrative portal for tracking customer requests, sales logistics, and inventory analytics.</p>
+                <div class="tech-stack">
+                    <span>Python</span> <span>Bootstrap</span> <span>JavaScript</span> <span>Flask</span> <span>PostgreSQL</span>
+                </div>
+                <a href="https://delivery-app-prkm.vercel.app/" target="_blank" class="portfolio-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Demo</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Interactive Requirement & Quote Form -->
+    <section id="quote-form" class="order-section">
+        <h2>Describe Your Software Project</h2>
+        <form class="order-container" onsubmit="submitSoftwareRequest(event)">
+
+            <div class="form-group">
+                <label for="project-type">Primary Project Type</label>
+                <select id="project-type" required>
+                    <option value="" disabled selected>Select software or web project type</option>
+                    <option value="Full-Stack Web Application">Full-Stack Web Application</option>
+                    <option value="E-Commerce Storefront">E-Commerce Storefront</option>
+                    <option value="Mobile App Development">Mobile App Development (Android / iOS)</option>
+                    <option value="Database Architecture & APIs">Database Architecture & REST APIs</option>
+                    <option value="Business Automation Software">Business Automation Software</option>
+                    <option value="UI/UX & Web Redesign">UI/UX & Web Redesign</option>
+                    <option value="Custom Software / Other">Other / Custom Software Project</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="timeline">Target Timeline</label>
+                    <select id="timeline">
+                        <option value="Urgent (1-2 Weeks)">Urgent (1-2 Weeks)</option>
+                        <option value="Standard (1 Month)">Standard (1 Month)</option>
+                        <option value="Flexible (2+ Months)">Flexible (2+ Months)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="budget">Estimated Budget (KSh)</label>
+                    <input type="text" id="budget" placeholder="e.g., KSh 30,000 - 80,000">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="project-details">Project Description & Requirements</label>
+                <textarea id="project-details" rows="4" required
+                    placeholder="Describe the key features, target audience, preferred technologies, or any reference websites/apps you like..."></textarea>
+            </div>
+
+            <hr class="form-divider">
+
+            <h3>Contact & Client Details</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="client-name">Full Name</label>
+                    <input type="text" id="client-name" placeholder="Larry Lemakanit" required>
+                </div>
+                <div class="form-group">
+                    <label for="client-phone">Phone Number</label>
+                    <input type="tel" id="client-phone" placeholder="0793751172" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="client-email">Email Address</label>
+                <input type="email" id="client-email" placeholder="name@example.com" required>
+            </div>
+
+            <button type="submit" class="submit-btn"><i class="fa-brands fa-whatsapp"></i> Submit Project Request via WhatsApp</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-info">
+            <div class="contact-item">
+                <i class="fa-solid fa-phone"></i>
+                <span>0756295128</span>
+            </div>
+            <div class="contact-item">
+                <i class="fa-solid fa-envelope"></i>
+                <span>michaellemakanit@gmail.com</span>
+            </div>
+            <div class="social-links">
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-tiktok"></i>
+                <span>mj.solutions</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        function selectService(serviceName) {
+            const selectElement = document.getElementById('project-type');
+            selectElement.value = serviceName;
+
+            // Scroll smoothly down to project details form
+            document.getElementById('quote-form').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function submitSoftwareRequest(event) {
+            event.preventDefault();
+
+            // Fetch form values
+            const projectType = document.getElementById('project-type').value;
+            const timeline = document.getElementById('timeline').value;
+            const budget = document.getElementById('budget').value || 'Not Specified';
+            const details = document.getElementById('project-details').value;
+            const name = document.getElementById('client-name').value;
+            const phone = document.getElementById('client-phone').value;
+            const email = document.getElementById('client-email').value;
+
+            // Format message string
+            const rawMessage = `Hello MJ Solutions!\n\n` +
+                `*New Software/Web Development Request*\n` +
+                `• *Project Type:* ${projectType}\n` +
+                `• *Timeline:* ${timeline}\n` +
+                `• *Estimated Budget:* ${budget}\n\n` +
+                `*Project Description:*\n${details}\n\n` +
+                `*Client Details:*\n` +
+                `• *Name:* ${name}\n` +
+                `• *Phone:* ${phone}\n` +
+                `• *Email:* ${email}`;
+
+            const encodedMessage = encodeURIComponent(rawMessage);
+            const whatsappPhone = "254756295128";
+
+            // Redirect to WhatsApp
+            window.open(`https://wa.me/${whatsappPhone}?text=${encodedMessage}`, '_blank');
+        }
+    </script>
+</body>
+
+</html>
