@@ -8,68 +8,234 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Flatpickr Custom Datepicker CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
 <style>
     /* --- Header Layout Base Fixes --- */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    position: relative;
-    z-index: 1000;
-}
-
-/* Hide Hamburger Menu Button on Desktop */
-.menu-toggle {
-    display: none;
-    background: transparent;
-    border: none;
-    color: #ff6600; /* Adjust to fit your brand color */
-    font-size: 1.8rem;
-    cursor: pointer;
-    padding: 0.5rem;
-}
-
-/* --- Mobile Screen Responsiveness (Screens under 768px wide) --- */
-@media screen and (max-width: 768px) {
-    .menu-toggle {
-        display: block; /* Show hamburger button on mobile */
-    }
-
-    /* Hide standard horizontal nav bar */
-    header nav {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: #111111; /* Dark mobile background */
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
-        border-top: 1px solid #222222;
-        padding: 1rem 0;
-    }
-
-    /* Slide/Show mobile nav when toggled active */
-    header nav.active {
+    header {
         display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        position: relative;
+        z-index: 1000;
+        background-color: #111111;
     }
 
-    /* Mobile links spacing & styling */
-    header nav a {
-        padding: 0.85rem 2rem;
+    /* Hide Hamburger Menu Button on Desktop */
+    .menu-toggle {
+        display: none;
+        background: transparent;
+        border: none;
+        color: #ff6600;
+        font-size: 1.8rem;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    /* --- Mobile Screen Responsiveness --- */
+    @media screen and (max-width: 768px) {
+        .menu-toggle {
+            display: block;
+        }
+
+        header nav {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #111111;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+            border-top: 1px solid #222222;
+            padding: 1rem 0;
+        }
+
+        header nav.active {
+            display: flex;
+        }
+
+        header nav a {
+            padding: 0.85rem 2rem;
+            width: 100%;
+            text-align: left;
+            border-bottom: 1px solid #1a1a1a;
+            font-size: 1rem;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        header nav a:last-child {
+            border-bottom: none;
+        }
+    }
+
+    /* --- MJ Solutions Modern Picker Card Styling --- */
+    .mj-schedule-card {
+        background: #181818;
+        border: 1px solid #2a2a2a;
+        border-radius: 18px;
+        padding: 1.5rem;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+        max-width: 480px;
+        margin: 0 auto;
+        color: #ffffff;
+    }
+
+    .mj-schedule-header {
+        margin-bottom: 1rem;
+    }
+
+    .mj-schedule-header h4 {
+        margin: 0 0 4px 0;
+        font-size: 1.1rem;
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    .mj-schedule-header p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #888888;
+    }
+
+    .mj-picker-controls {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 1.2rem;
+    }
+
+    .mj-picker-box {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: #222222;
+        border: 1px solid #333333;
+        border-radius: 12px;
+        padding: 0 12px;
+        transition: border-color 0.2s;
+    }
+
+    .mj-picker-box:focus-within, .mj-picker-box:hover {
+        border-color: #ff6600;
+    }
+
+    .mj-picker-box i {
+        color: #ff6600;
+        font-size: 0.95rem;
+        margin-right: 8px;
+    }
+
+    .mj-picker-box input, .mj-picker-box select {
         width: 100%;
-        text-align: left;
-        border-bottom: 1px solid #1a1a1a;
-        font-size: 1rem;
+        background: transparent;
+        border: none;
+        color: #ffffff;
+        padding: 10px 0;
+        font-size: 0.9rem;
+        outline: none;
+        cursor: pointer;
     }
 
-    header nav a:last-child {
-        border-bottom: none;
+    .mj-picker-box select option {
+        background: #2a2a2a;
+        color: #ffffff;
     }
-}
+
+    .mj-action-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding-top: 10px;
+        border-top: 1px solid #282828;
+    }
+
+    .mj-btn {
+        padding: 8px 18px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .mj-btn-remove {
+        background-color: #2a2a2a;
+        color: #cccccc;
+    }
+
+    .mj-btn-remove:hover {
+        background-color: #383838;
+        color: #ffffff;
+    }
+
+    .mj-btn-done {
+        background-color: #ff6600;
+        color: #ffffff;
+    }
+
+    .mj-btn-done:hover {
+        background-color: #e65c00;
+        box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
+    }
+
+    /* --- Custom Flatpickr Theme (MJ Colors) --- */
+    .flatpickr-calendar {
+        background: #181818 !important;
+        border: 1px solid #333333 !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8) !important;
+        border-radius: 16px !important;
+        font-family: inherit !important;
+        padding: 8px !important;
+    }
+
+    .flatpickr-months .flatpickr-month,
+    .flatpickr-current-month .flatpickr-monthDropdown-months,
+    .flatpickr-months .flatpickr-prev-month, 
+    .flatpickr-months .flatpickr-next-month {
+        color: #ffffff !important;
+        fill: #ffffff !important;
+    }
+
+    span.flatpickr-weekday {
+        color: #888888 !important;
+        font-weight: 600 !important;
+    }
+
+    .flatpickr-day {
+        color: #eeeeee !important;
+        border-radius: 50% !important;
+    }
+
+    .flatpickr-day:hover {
+        background: #2a2a2a !important;
+    }
+
+    /* Sunday / Monday Closed Styling */
+    .flatpickr-day.flatpickr-disabled, 
+    .flatpickr-day.flatpickr-disabled:hover {
+        color: #444444 !important;
+        background: transparent !important;
+        text-decoration: line-through;
+        opacity: 0.3;
+        cursor: not-allowed !important;
+    }
+
+    /* Selected Date (MJ Orange Pill) */
+    .flatpickr-day.selected, 
+    .flatpickr-day.selected:hover {
+        background: #ff6600 !important;
+        border-color: #ff6600 !important;
+        color: #ffffff !important;
+        font-weight: bold;
+    }
 </style>
+
 <body>
 
     <!-- Header Navigation -->
@@ -101,7 +267,8 @@ header {
     <!-- Page Banner -->
     <section class="page-banner">
         <h1>BEAUTY DEVICES & <span>MAKEUP SERVICES</span></h1>
-        <p>Smart electronic beauty gadgets, personal care devices, professional makeup artist services, and bridal glam.</p>
+        <p>Smart electronic beauty gadgets, personal care devices, professional makeup artist services, and bridal glam.
+        </p>
     </section>
 
     <!-- Featured Products Section -->
@@ -109,7 +276,7 @@ header {
         <h2>Popular Beauty & Personal Care Tech</h2>
         <div class="catalog-grid">
 
-            <div class="catalog-card" onclick="selectProduct('Sonic Facial Cleansing Brush', 2500)">
+            <div class="catalog-card" onclick="selectProduct('Sonic Facial Cleansing Brush')">
                 <i class="fa-solid fa-wand-magic-sparkles"></i>
                 <h3>Sonic Facial Cleanser</h3>
                 <p>Deep pore cleansing silicone massage brush with adjustable vibration speeds.</p>
@@ -117,7 +284,7 @@ header {
                 <button class="select-btn">Select & Buy</button>
             </div>
 
-            <div class="catalog-card" onclick="selectProduct('LED Light Therapy Mask', 6500)">
+            <div class="catalog-card" onclick="selectProduct('LED Light Therapy Mask')">
                 <i class="fa-solid fa-face-smile"></i>
                 <h3>LED Facial Therapy Mask</h3>
                 <p>7-color light therapy for acne treatment, skin tightening, and rejuvenation.</p>
@@ -125,7 +292,7 @@ header {
                 <button class="select-btn">Select & Buy</button>
             </div>
 
-            <div class="catalog-card" onclick="selectProduct('Ultrasonic Skin Scrubber', 3200)">
+            <div class="catalog-card" onclick="selectProduct('Ultrasonic Skin Scrubber')">
                 <i class="fa-solid fa-gem"></i>
                 <h3>Ultrasonic Skin Scrubber</h3>
                 <p>Deep blackhead removal, exfoliation, and serum absorption tool.</p>
@@ -133,7 +300,7 @@ header {
                 <button class="select-btn">Select & Buy</button>
             </div>
 
-            <div class="catalog-card" onclick="selectProduct('Pro Hair Trimmer & Styling Set', 3800)">
+            <div class="catalog-card" onclick="selectProduct('Pro Hair Trimmer Set')">
                 <i class="fa-solid fa-scissors"></i>
                 <h3>Pro Hair Trimmer Set</h3>
                 <p>Cordless rechargeable high-precision hair & beard grooming kit.</p>
@@ -141,7 +308,7 @@ header {
                 <button class="select-btn">Select & Buy</button>
             </div>
 
-            <div class="catalog-card" onclick="selectProduct('IPL Hair Removal Handset', 8500)">
+            <div class="catalog-card" onclick="selectProduct('Laser IPL Hair Remover')">
                 <i class="fa-solid fa-bolt"></i>
                 <h3>Laser IPL Hair Remover</h3>
                 <p>Permanent painless laser hair removal device for full body smoothing.</p>
@@ -149,7 +316,7 @@ header {
                 <button class="select-btn">Select & Buy</button>
             </div>
 
-            <div class="catalog-card" onclick="selectProduct('Hot Air Hair Styler & Dryer', 4200)">
+            <div class="catalog-card" onclick="selectProduct('Multifunctional Hair Styler')">
                 <i class="fa-solid fa-wind"></i>
                 <h3>Multifunctional Hair Styler</h3>
                 <p>5-in-1 hot air blow dryer, volumizer, and curling wand set.</p>
@@ -163,18 +330,20 @@ header {
     <!-- Professional Makeup Services Section -->
     <section id="beauty-services" class="printing-catalog">
         <h2>Professional Makeup & Studio Services</h2>
-        <p class="section-sub" style="text-align: center; margin-bottom: 2rem; color: #666;">Book an appointment with our lead makeup artist for flawless looks tailored to any occasion.</p>
+        <p class="section-sub" style="text-align: center; margin-bottom: 2rem; color: #666;">Book an appointment with
+            our lead makeup artist for flawless looks tailored to any occasion.</p>
         <div class="catalog-grid">
 
-            <div class="catalog-card" onclick="selectProduct('Soft Glam Full Face Makeup', 3000)">
+            <div class="catalog-card" onclick="selectProduct('Soft Glam Full Face Makeup')">
                 <i class="fa-solid fa-brush"></i>
                 <h3>Soft Glam Full Face</h3>
-                <p>Natural, radiant glow featuring light contouring, subtle eye makeup, and premium lash application.</p>
+                <p>Natural, radiant glow featuring light contouring, subtle eye makeup, and premium lash application.
+                </p>
                 <span class="price-tag">KSh 3,000</span>
                 <button class="select-btn">Book Appointment</button>
             </div>
 
-            <div class="catalog-card" onclick="selectProduct('Full Studio & Event Glam Makeup', 4500)">
+            <div class="catalog-card" onclick="selectProduct('Full Studio & Event Glam Makeup')">
                 <i class="fa-solid fa-camera"></i>
                 <h3>Full Event & Studio Glam</h3>
                 <p>Long-lasting, HD photo-ready makeup with dramatic eyes, bold contouring, and mink lashes.</p>
@@ -182,15 +351,16 @@ header {
                 <button class="select-btn">Book Appointment</button>
             </div>
 
-            <div class="catalog-card" onclick="selectProduct('Bridal Glam Package (Bride)', 12000)">
+            <div class="catalog-card" onclick="selectProduct('Bridal Glam Package (Bride)')">
                 <i class="fa-solid fa-ring"></i>
                 <h3>Bridal Glam (Bride)</h3>
-                <p>Luxury wedding day glam including a trial session, skin prep, touch-up kit, and long-wear sealing.</p>
+                <p>Luxury wedding day glam including a trial session, skin prep, touch-up kit, and long-wear sealing.
+                </p>
                 <span class="price-tag">KSh 12,000</span>
                 <button class="select-btn">Book Appointment</button>
             </div>
 
-            <div class="catalog-card" onclick="selectProduct('Bridesmaids & Squad Makeup', 3500)">
+            <div class="catalog-card" onclick="selectProduct('Bridesmaids & Squad Makeup')">
                 <i class="fa-solid fa-users-line"></i>
                 <h3>Bridesmaids & Squad Glam</h3>
                 <p>Coordinated elegance for bridesmaids and wedding guests (price per person).</p>
@@ -198,7 +368,7 @@ header {
                 <button class="select-btn">Book Appointment</button>
             </div>
 
-            <div class="catalog-card" onclick="selectProduct('Editorial & Photoshoot Makeup', 5000)">
+            <div class="catalog-card" onclick="selectProduct('Editorial & Photoshoot Makeup')">
                 <i class="fa-solid fa-clapperboard"></i>
                 <h3>Editorial & Photoshoot</h3>
                 <p>High-concept, creative makeup tailored for commercial ads, fashion shoots, and videos.</p>
@@ -206,7 +376,7 @@ header {
                 <button class="select-btn">Book Appointment</button>
             </div>
 
-            <div class="catalog-card" onclick="selectProduct('1-on-1 Personal Makeup Masterclass', 7500)">
+            <div class="catalog-card" onclick="selectProduct('1-on-1 Personal Makeup Masterclass')">
                 <i class="fa-solid fa-graduation-cap"></i>
                 <h3>1-on-1 Makeup Masterclass</h3>
                 <p>Learn everyday glam, proper shade matching, tool usage, and eyebrow sculpting techniques.</p>
@@ -220,7 +390,8 @@ header {
     <!-- Online Retail Platforms Section -->
     <section id="online-shops" class="retail-platforms-section">
         <h2>Buy MJ Beauty Products Online</h2>
-        <p class="section-sub">Shop our official products on your favorite online marketplaces with fast nationwide delivery.</p>
+        <p class="section-sub">Shop our official products on your favorite online marketplaces with fast nationwide
+            delivery.</p>
 
         <div class="platform-grid">
             <a href="https://mj-grocery-aso3.vercel.app/" class="platform-card official-store">
@@ -230,7 +401,8 @@ header {
                 <span class="platform-btn">Visit Website Store <i class="fa-solid fa-arrow-right"></i></span>
             </a>
 
-            <a href="https://www.jumia.co.ke/jolene/?sort=rating#catalog-listing" target="_blank" class="platform-card jumia">
+            <a href="https://www.jumia.co.ke/jolene/?sort=rating#catalog-listing" target="_blank"
+                class="platform-card jumia">
                 <i class="fa-solid fa-store"></i>
                 <h3>Jumia Kenya</h3>
                 <p>Shop our official Jumia storefront for verified products & door delivery.</p>
@@ -241,14 +413,17 @@ header {
                 <i class="fa-solid fa-cart-flatbed"></i>
                 <h3>Kilimall Marketplace</h3>
                 <p>Order beauty gadgets with convenient pickup station delivery nationwide.</p>
-                <span class="platform-btn">Shop on Kilimall <i class="fa-solid fa-arrow-up-right-from-square"></i></span><span style="color: #696868;" class="coming-soon">Coming Soon</span>
+                <span class="platform-btn">Shop on Kilimall <i
+                        class="fa-solid fa-arrow-up-right-from-square"></i></span><span style="color: #696868;"
+                    class="coming-soon">Coming Soon</span>
             </a>
 
             <a href="https://www.tiktok.com/@mj.solutions" target="_blank" class="platform-card tiktok-shop">
                 <i class="fa-brands fa-tiktok"></i>
                 <h3>TikTok Shop & Social</h3>
                 <p>Watch live product demos and order directly via our social channels.</p>
-                <span class="platform-btn">Explore TikTok Shop <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+                <span class="platform-btn">Explore TikTok Shop <i
+                        class="fa-solid fa-arrow-up-right-from-square"></i></span>
             </a>
         </div>
     </section>
@@ -272,7 +447,7 @@ header {
                     <i class="fa-solid fa-clock"></i>
                     <div>
                         <h4>Working Hours</h4>
-                        <p>Monday – Saturday: 8:00 AM – 6:30 PM<br>Sunday & Holidays: By Appointment</p>
+                        <p>Tuesday – Friday: 8:00 AM – 6:30 PM<br><span style="color: #ff6600;">Sunday & Saturday: Closed</span></p>
                     </div>
                 </div>
 
@@ -290,13 +465,9 @@ header {
             </div>
 
             <div class="map-wrapper">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.817282717013!2d36.821946!3d-1.286389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d68f237fef%3A0xb36a04803d15b22b!2sNairobi%20CBD!5e0!3m2!1sen!2ske!4v1700000000000!5m2!1sen!2ske" 
-                    width="100%" 
-                    height="320" 
-                    style="border:0; border-radius: 12px;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.817282717013!2d36.821946!3d-1.286389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d68f237fef%3A0xb36a04803d15b22b!2sNairobi%20CBD!5e0!3m2!1sen!2ske!4v1700000000000!5m2!1sen!2ske"
+                    width="100%" height="320" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
@@ -310,31 +481,31 @@ header {
 
             <div class="form-group">
                 <label for="product-type">Selected Product / Service</label>
-                <select id="product-type" required onchange="updateBeautyPrice()">
+                <select id="product-type" required onchange="handleProductSelection()">
                     <option value="" disabled selected>Select a product or service from above</option>
                     <optgroup label="Beauty Devices & Products">
-                        <option value="Sonic Facial Cleanser" data-price="2500">Sonic Facial Cleanser (KSh 2,500)</option>
-                        <option value="LED Facial Therapy Mask" data-price="6500">LED Facial Therapy Mask (KSh 6,500)</option>
-                        <option value="Ultrasonic Skin Scrubber" data-price="3200">Ultrasonic Skin Scrubber (KSh 3,200)</option>
-                        <option value="Pro Hair Trimmer Set" data-price="3800">Pro Hair Trimmer Set (KSh 3,800)</option>
-                        <option value="Laser IPL Hair Remover" data-price="8500">Laser IPL Hair Remover (KSh 8,500)</option>
-                        <option value="Multifunctional Hair Styler" data-price="4200">Multifunctional Hair Styler (KSh 4,200)</option>
+                        <option value="Sonic Facial Cleanser" data-price="2500" data-type="product">Sonic Facial Cleanser (KSh 2,500)</option>
+                        <option value="LED Facial Therapy Mask" data-price="6500" data-type="product">LED Facial Therapy Mask (KSh 6,500)</option>
+                        <option value="Ultrasonic Skin Scrubber" data-price="3200" data-type="product">Ultrasonic Skin Scrubber (KSh 3,200)</option>
+                        <option value="Pro Hair Trimmer Set" data-price="3800" data-type="product">Pro Hair Trimmer Set (KSh 3,800)</option>
+                        <option value="Laser IPL Hair Remover" data-price="8500" data-type="product">Laser IPL Hair Remover (KSh 8,500)</option>
+                        <option value="Multifunctional Hair Styler" data-price="4200" data-type="product">Multifunctional Hair Styler (KSh 4,200)</option>
                     </optgroup>
                     <optgroup label="Makeup & Artist Services">
-                        <option value="Soft Glam Full Face Makeup" data-price="3000">Soft Glam Full Face (KSh 3,000)</option>
-                        <option value="Full Studio & Event Glam Makeup" data-price="4500">Full Studio & Event Glam (KSh 4,500)</option>
-                        <option value="Bridal Glam Package (Bride)" data-price="12000">Bridal Glam Package (KSh 12,000)</option>
-                        <option value="Bridesmaids & Squad Makeup" data-price="3500">Bridesmaids & Squad Makeup (KSh 3,500/person)</option>
-                        <option value="Editorial & Photoshoot Makeup" data-price="5000">Editorial & Photoshoot Makeup (KSh 5,000)</option>
-                        <option value="1-on-1 Personal Makeup Masterclass" data-price="7500">1-on-1 Makeup Masterclass (KSh 7,500)</option>
+                        <option value="Soft Glam Full Face Makeup" data-price="3000" data-type="service">Soft Glam Full Face (KSh 3,000)</option>
+                        <option value="Full Studio & Event Glam Makeup" data-price="4500" data-type="service">Full Studio & Event Glam (KSh 4,500)</option>
+                        <option value="Bridal Glam Package (Bride)" data-price="12000" data-type="service">Bridal Glam Package (KSh 12,000)</option>
+                        <option value="Bridesmaids & Squad Makeup" data-price="3500" data-type="service">Bridesmaids & Squad Makeup (KSh 3,500/person)</option>
+                        <option value="Editorial & Photoshoot Makeup" data-price="5000" data-type="service">Editorial & Photoshoot Makeup (KSh 5,000)</option>
+                        <option value="1-on-1 Personal Makeup Masterclass" data-price="7500" data-type="service">1-on-1 Makeup Masterclass (KSh 7,500)</option>
                     </optgroup>
-                    <option value="Other Custom Inquiry" data-price="0">Other / Custom Product or Service Inquiry</option>
+                    <option value="Other Custom Inquiry" data-price="0" data-type="custom">Other / Custom Product or Service Inquiry</option>
                 </select>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="quantity">Quantity / Number of People</label>
+                    <label for="quantity" id="quantity-label">Quantity / Number of People</label>
                     <input type="number" id="quantity" min="1" value="1" required oninput="updateBeautyPrice()">
                 </div>
                 <div class="form-group">
@@ -348,9 +519,50 @@ header {
                 </div>
             </div>
 
+            <!-- Dynamic Appointment Date/Time Group (Shows ONLY for Services) -->
+            <div class="form-group" id="booking-datetime-group" style="display: none; width: 100%;">
+                <label>Schedule Appointment</label>
+                <div class="mj-schedule-card">
+                    <div class="mj-schedule-header">
+                        <h4>Schedule Session</h4>
+                        <p>Time Zone: Nairobi, EAT (GMT +03:00)</p>
+                    </div>
+
+                    <div class="mj-picker-controls">
+                        <!-- Date Picker Field -->
+                        <div class="mj-picker-box">
+                            <i class="fa-regular fa-calendar"></i>
+                            <input type="text" id="booking-date" placeholder="Select Date" readonly>
+                        </div>
+
+                        <!-- Time Picker Field -->
+                        <div class="mj-picker-box">
+                            <i class="fa-regular fa-clock"></i>
+                            <select id="booking-time">
+                                <option value="09:00 AM">09:00 AM</option>
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="12:00 PM">12:00 PM</option>
+                                <option value="01:00 PM">01:00 PM</option>
+                                <option value="02:00 PM">02:00 PM</option>
+                                <option value="03:00 PM">03:00 PM</option>
+                                <option value="04:00 PM">04:00 PM</option>
+                                <option value="05:00 PM">05:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Action Bar Buttons -->
+                    <div class="mj-action-footer">
+                        <button type="button" class="mj-btn mj-btn-remove" onclick="clearSelectedDate()">Remove</button>
+                        <button type="button" class="mj-btn mj-btn-done" onclick="confirmSelectedDate()">Done</button>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group">
-                <label for="notes">Appointment Date/Time or Additional Details</label>
-                <textarea id="notes" rows="3" placeholder="Specify preferred appointment date/time, housecall location, or skin preferences..."></textarea>
+                <label for="notes">Additional Details / Location Notes</label>
+                <textarea id="notes" rows="2" placeholder="Housecall address, skin preferences, or additional details..."></textarea>
             </div>
 
             <hr class="form-divider">
@@ -399,12 +611,39 @@ header {
 
     <!-- JavaScript Logic -->
     <script>
+        let calendarInstance = null;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Flatpickr Custom Picker
+            calendarInstance = flatpickr("#booking-date", {
+                dateFormat: "Y-m-d",
+                minDate: "today",
+                disable: [
+                    function (date) {
+                        // Disable Sundays (0) and Saturdays (6) - Shop Closed
+                        return (date.getDay() === 0 || date.getDay() === 6);
+                    }
+                ]
+            });
+        });
+
+        function clearSelectedDate() {
+            if (calendarInstance) {
+                calendarInstance.clear();
+            }
+        }
+
+        function confirmSelectedDate() {
+            if (calendarInstance) {
+                calendarInstance.close();
+            }
+        }
+
         function toggleMenu() {
             const nav = document.getElementById('nav-menu');
             const toggleBtn = document.getElementById('menu-toggle');
             nav.classList.toggle('active');
 
-            // Switch icon between hamburger bars and close icon
             const icon = toggleBtn.querySelector('i');
             if (nav.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
@@ -431,6 +670,31 @@ header {
             selectElement.value = productName;
 
             document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' });
+            handleProductSelection();
+        }
+
+        function handleProductSelection() {
+            const selectElement = document.getElementById('product-type');
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const itemType = selectedOption ? selectedOption.getAttribute('data-type') : '';
+            const datetimeGroup = document.getElementById('booking-datetime-group');
+            const bookingDate = document.getElementById('booking-date');
+            const bookingTime = document.getElementById('booking-time');
+            const qtyLabel = document.getElementById('quantity-label');
+
+            if (itemType === 'service') {
+                datetimeGroup.style.display = 'block';
+                bookingDate.required = true;
+                bookingTime.required = true;
+                qtyLabel.innerText = "Number of People";
+            } else {
+                datetimeGroup.style.display = 'none';
+                bookingDate.required = false;
+                bookingTime.required = false;
+                clearSelectedDate();
+                qtyLabel.innerText = "Quantity";
+            }
+
             updateBeautyPrice();
         }
 
@@ -447,7 +711,11 @@ header {
         function submitBeautyOrder(event) {
             event.preventDefault();
 
-            const product = document.getElementById('product-type').value;
+            const selectElement = document.getElementById('product-type');
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const itemType = selectedOption ? selectedOption.getAttribute('data-type') : '';
+
+            const product = selectElement.value;
             const quantity = document.getElementById('quantity').value;
             const delivery = document.getElementById('delivery-option').value;
             const notes = document.getElementById('notes').value;
@@ -455,9 +723,18 @@ header {
             const phone = document.getElementById('client-phone').value;
             const total = document.getElementById('total-price').innerText;
 
+            const bookingDate = document.getElementById('booking-date').value;
+            const bookingTime = document.getElementById('booking-time').value;
+
             if (!product) {
                 alert('Please select a product or service first.');
                 return;
+            }
+
+            let appointmentInfo = '';
+            if (itemType === 'service' && bookingDate) {
+                appointmentInfo = `• *Preferred Date:* ${bookingDate}\n` +
+                                  `• *Preferred Time:* ${bookingTime}\n`;
             }
 
             const rawMessage = `Hello MJ Solutions!\n\n` +
@@ -465,11 +742,12 @@ header {
                 `• *Product/Service:* ${product}\n` +
                 `• *Quantity/People:* ${quantity}\n` +
                 `• *Fulfillment/Type:* ${delivery}\n` +
+                appointmentInfo +
                 `• *Total Price:* ${total}\n\n` +
                 `*Customer Details:*\n` +
                 `• *Name:* ${name}\n` +
                 `• *Phone:* ${phone}\n` +
-                `• *Notes/Date/Address:* ${notes || 'None'}`;
+                `• *Notes/Address:* ${notes || 'None'}`;
 
             const whatsappPhone = "254756295128";
             window.open(`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(rawMessage)}`, '_blank');
