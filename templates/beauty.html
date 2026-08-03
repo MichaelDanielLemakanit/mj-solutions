@@ -9,7 +9,67 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+<style>
+    /* --- Header Layout Base Fixes --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    position: relative;
+    z-index: 1000;
+}
 
+/* Hide Hamburger Menu Button on Desktop */
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #ff6600; /* Adjust to fit your brand color */
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+/* --- Mobile Screen Responsiveness (Screens under 768px wide) --- */
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Show hamburger button on mobile */
+    }
+
+    /* Hide standard horizontal nav bar */
+    header nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #111111; /* Dark mobile background */
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+        border-top: 1px solid #222222;
+        padding: 1rem 0;
+    }
+
+    /* Slide/Show mobile nav when toggled active */
+    header nav.active {
+        display: flex;
+    }
+
+    /* Mobile links spacing & styling */
+    header nav a {
+        padding: 0.85rem 2rem;
+        width: 100%;
+        text-align: left;
+        border-bottom: 1px solid #1a1a1a;
+        font-size: 1rem;
+    }
+
+    header nav a:last-child {
+        border-bottom: none;
+    }
+}
+</style>
 <body>
 
     <!-- Header Navigation -->
@@ -21,13 +81,20 @@
                 <p>PRINTING, SOFTWARE & BEAUTY</p>
             </div>
         </div>
-        <nav>
-            <a href="{{ url_for('home') }}">Home</a>
-            <a href="#products">Beauty Catalog</a>
-            <a href="#beauty-services">Makeup Services</a>
-            <a href="#online-shops">Where to Buy</a>
-            <a href="#store-location">Physical Shop</a>
-            <a href="#order-form">Place Order / Book</a>
+
+        <!-- Hamburger Mobile Menu Toggle Button -->
+        <button class="menu-toggle" id="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- Navigation Links -->
+        <nav id="nav-menu">
+            <a href="{{ url_for('home') }}" onclick="closeMenu()">Home</a>
+            <a href="#products" onclick="closeMenu()">Beauty Catalog</a>
+            <a href="#beauty-services" onclick="closeMenu()">Makeup Services</a>
+            <a href="#online-shops" onclick="closeMenu()">Where to Buy</a>
+            <a href="#store-location" onclick="closeMenu()">Physical Shop</a>
+            <a href="#order-form" onclick="closeMenu()">Place Order / Book</a>
         </nav>
     </header>
 
@@ -332,6 +399,33 @@
 
     <!-- JavaScript Logic -->
     <script>
+        function toggleMenu() {
+            const nav = document.getElementById('nav-menu');
+            const toggleBtn = document.getElementById('menu-toggle');
+            nav.classList.toggle('active');
+
+            // Switch icon between hamburger bars and close icon
+            const icon = toggleBtn.querySelector('i');
+            if (nav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        function closeMenu() {
+            const nav = document.getElementById('nav-menu');
+            const toggleBtn = document.getElementById('menu-toggle');
+            if (nav.classList.contains('active')) {
+                nav.classList.remove('active');
+                const icon = toggleBtn.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
         function selectProduct(productName) {
             const selectElement = document.getElementById('product-type');
             selectElement.value = productName;
