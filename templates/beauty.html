@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beauty Devices & Retail | MJ Solutions</title>
+    <title>Beauty Devices, Makeup Services & Retail | MJ Solutions</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -24,16 +24,17 @@
         <nav>
             <a href="{{ url_for('home') }}">Home</a>
             <a href="#products">Beauty Catalog</a>
+            <a href="#beauty-services">Makeup Services</a>
             <a href="#online-shops">Where to Buy</a>
             <a href="#store-location">Physical Shop</a>
-            <a href="#order-form">Place Order</a>
+            <a href="#order-form">Place Order / Book</a>
         </nav>
     </header>
 
     <!-- Page Banner -->
     <section class="page-banner">
-        <h1>BEAUTY DEVICES & <span>RETAIL</span></h1>
-        <p>Smart electronic beauty gadgets, personal care devices, facial care tech, and premium grooming accessories.</p>
+        <h1>BEAUTY DEVICES & <span>MAKEUP SERVICES</span></h1>
+        <p>Smart electronic beauty gadgets, personal care devices, professional makeup artist services, and bridal glam.</p>
     </section>
 
     <!-- Featured Products Section -->
@@ -92,6 +93,63 @@
         </div>
     </section>
 
+    <!-- Professional Makeup Services Section -->
+    <section id="beauty-services" class="printing-catalog">
+        <h2>Professional Makeup & Studio Services</h2>
+        <p class="section-sub" style="text-align: center; margin-bottom: 2rem; color: #666;">Book an appointment with our lead makeup artist for flawless looks tailored to any occasion.</p>
+        <div class="catalog-grid">
+
+            <div class="catalog-card" onclick="selectProduct('Soft Glam Full Face Makeup', 3000)">
+                <i class="fa-solid fa-brush"></i>
+                <h3>Soft Glam Full Face</h3>
+                <p>Natural, radiant glow featuring light contouring, subtle eye makeup, and premium lash application.</p>
+                <span class="price-tag">KSh 3,000</span>
+                <button class="select-btn">Book Appointment</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectProduct('Full Studio & Event Glam Makeup', 4500)">
+                <i class="fa-solid fa-camera"></i>
+                <h3>Full Event & Studio Glam</h3>
+                <p>Long-lasting, HD photo-ready makeup with dramatic eyes, bold contouring, and mink lashes.</p>
+                <span class="price-tag">KSh 4,500</span>
+                <button class="select-btn">Book Appointment</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectProduct('Bridal Glam Package (Bride)', 12000)">
+                <i class="fa-solid fa-ring"></i>
+                <h3>Bridal Glam (Bride)</h3>
+                <p>Luxury wedding day glam including a trial session, skin prep, touch-up kit, and long-wear sealing.</p>
+                <span class="price-tag">KSh 12,000</span>
+                <button class="select-btn">Book Appointment</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectProduct('Bridesmaids & Squad Makeup', 3500)">
+                <i class="fa-solid fa-users-line"></i>
+                <h3>Bridesmaids & Squad Glam</h3>
+                <p>Coordinated elegance for bridesmaids and wedding guests (price per person).</p>
+                <span class="price-tag">KSh 3,500 / person</span>
+                <button class="select-btn">Book Appointment</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectProduct('Editorial & Photoshoot Makeup', 5000)">
+                <i class="fa-solid fa-clapperboard"></i>
+                <h3>Editorial & Photoshoot</h3>
+                <p>High-concept, creative makeup tailored for commercial ads, fashion shoots, and videos.</p>
+                <span class="price-tag">KSh 5,000</span>
+                <button class="select-btn">Book Appointment</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectProduct('1-on-1 Personal Makeup Masterclass', 7500)">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h3>1-on-1 Makeup Masterclass</h3>
+                <p>Learn everyday glam, proper shade matching, tool usage, and eyebrow sculpting techniques.</p>
+                <span class="price-tag">KSh 7,500</span>
+                <button class="select-btn">Book Session</button>
+            </div>
+
+        </div>
+    </section>
+
     <!-- Online Retail Platforms Section -->
     <section id="online-shops" class="retail-platforms-section">
         <h2>Buy MJ Beauty Products Online</h2>
@@ -130,15 +188,15 @@
 
     <!-- Physical Location Section -->
     <section id="store-location" class="location-section">
-        <h2>Visit Our Physical Shop</h2>
-        <p class="section-sub">Walk in to test our beauty devices and buy directly over the counter.</p>
+        <h2>Visit Our Physical Shop & Studio</h2>
+        <p class="section-sub">Walk in to test our beauty devices or get your makeup done in person.</p>
 
         <div class="location-container">
             <div class="location-info">
                 <div class="info-block">
                     <i class="fa-solid fa-location-dot"></i>
                     <div>
-                        <h4>Shop Address</h4>
+                        <h4>Shop & Studio Address</h4>
                         <p>MJ Solutions Center, Tom Mboya Street / CBD, Nairobi, Kenya</p>
                     </div>
                 </div>
@@ -147,14 +205,14 @@
                     <i class="fa-solid fa-clock"></i>
                     <div>
                         <h4>Working Hours</h4>
-                        <p>Monday – Saturday: 8:00 AM – 6:30 PM<br>Sunday & Holidays: Closed</p>
+                        <p>Monday – Saturday: 8:00 AM – 6:30 PM<br>Sunday & Holidays: By Appointment</p>
                     </div>
                 </div>
 
                 <div class="info-block">
                     <i class="fa-solid fa-headset"></i>
                     <div>
-                        <h4>Customer Care & Pickup Helpline</h4>
+                        <h4>Customer Care & Appointments Helpline</h4>
                         <p>Phone: 0756295128 / 0717434845<br>Email: michaellemakanit@gmail.com</p>
                     </div>
                 </div>
@@ -178,43 +236,54 @@
         </div>
     </section>
 
-    <!-- Interactive Beauty Order Form -->
+    <!-- Interactive Beauty Order & Service Booking Form -->
     <section id="order-form" class="order-section">
-        <h2>Order or Inquire via WhatsApp</h2>
+        <h2>Order Products or Book Makeup via WhatsApp</h2>
         <form class="order-container" onsubmit="submitBeautyOrder(event)">
 
             <div class="form-group">
-                <label for="product-type">Selected Product / Item</label>
+                <label for="product-type">Selected Product / Service</label>
                 <select id="product-type" required onchange="updateBeautyPrice()">
-                    <option value="" disabled selected>Select a product from above or dropdown</option>
-                    <option value="Sonic Facial Cleanser" data-price="2500">Sonic Facial Cleanser (KSh 2,500)</option>
-                    <option value="LED Facial Therapy Mask" data-price="6500">LED Facial Therapy Mask (KSh 6,500)</option>
-                    <option value="Ultrasonic Skin Scrubber" data-price="3200">Ultrasonic Skin Scrubber (KSh 3,200)</option>
-                    <option value="Pro Hair Trimmer Set" data-price="3800">Pro Hair Trimmer Set (KSh 3,800)</option>
-                    <option value="Laser IPL Hair Remover" data-price="8500">Laser IPL Hair Remover (KSh 8,500)</option>
-                    <option value="Multifunctional Hair Styler" data-price="4200">Multifunctional Hair Styler (KSh 4,200)</option>
-                    <option value="Other Beauty Device" data-price="0">Other / Custom Product Inquiry</option>
+                    <option value="" disabled selected>Select a product or service from above</option>
+                    <optgroup label="Beauty Devices & Products">
+                        <option value="Sonic Facial Cleanser" data-price="2500">Sonic Facial Cleanser (KSh 2,500)</option>
+                        <option value="LED Facial Therapy Mask" data-price="6500">LED Facial Therapy Mask (KSh 6,500)</option>
+                        <option value="Ultrasonic Skin Scrubber" data-price="3200">Ultrasonic Skin Scrubber (KSh 3,200)</option>
+                        <option value="Pro Hair Trimmer Set" data-price="3800">Pro Hair Trimmer Set (KSh 3,800)</option>
+                        <option value="Laser IPL Hair Remover" data-price="8500">Laser IPL Hair Remover (KSh 8,500)</option>
+                        <option value="Multifunctional Hair Styler" data-price="4200">Multifunctional Hair Styler (KSh 4,200)</option>
+                    </optgroup>
+                    <optgroup label="Makeup & Artist Services">
+                        <option value="Soft Glam Full Face Makeup" data-price="3000">Soft Glam Full Face (KSh 3,000)</option>
+                        <option value="Full Studio & Event Glam Makeup" data-price="4500">Full Studio & Event Glam (KSh 4,500)</option>
+                        <option value="Bridal Glam Package (Bride)" data-price="12000">Bridal Glam Package (KSh 12,000)</option>
+                        <option value="Bridesmaids & Squad Makeup" data-price="3500">Bridesmaids & Squad Makeup (KSh 3,500/person)</option>
+                        <option value="Editorial & Photoshoot Makeup" data-price="5000">Editorial & Photoshoot Makeup (KSh 5,000)</option>
+                        <option value="1-on-1 Personal Makeup Masterclass" data-price="7500">1-on-1 Makeup Masterclass (KSh 7,500)</option>
+                    </optgroup>
+                    <option value="Other Custom Inquiry" data-price="0">Other / Custom Product or Service Inquiry</option>
                 </select>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="quantity">Quantity</label>
+                    <label for="quantity">Quantity / Number of People</label>
                     <input type="number" id="quantity" min="1" value="1" required oninput="updateBeautyPrice()">
                 </div>
                 <div class="form-group">
-                    <label for="delivery-option">Fulfillment Option</label>
+                    <label for="delivery-option">Fulfillment / Appointment Type</label>
                     <select id="delivery-option">
-                        <option value="Doorstep Delivery (Nairobi)">Doorstep Delivery (Nairobi)</option>
+                        <option value="Studio Appointment (CBD Shop)">Studio Appointment (CBD Shop)</option>
+                        <option value="Housecall / On-Location Service">Housecall / On-Location Service</option>
+                        <option value="Doorstep Delivery (Nairobi)">Doorstep Product Delivery (Nairobi)</option>
                         <option value="Upcountry Parcel Courier">Upcountry Parcel Courier (Fargo/G4S/Speedaf)</option>
-                        <option value="Physical Shop Pick-up">Pick Up at Physical Shop (CBD)</option>
                     </select>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="notes">Additional Notes / Delivery Address</label>
-                <textarea id="notes" rows="3" placeholder="Specify color preference, delivery location details, or custom questions..."></textarea>
+                <label for="notes">Appointment Date/Time or Additional Details</label>
+                <textarea id="notes" rows="3" placeholder="Specify preferred appointment date/time, housecall location, or skin preferences..."></textarea>
             </div>
 
             <hr class="form-divider">
@@ -223,7 +292,7 @@
             <div class="form-row">
                 <div class="form-group">
                     <label for="client-name">Full Name</label>
-                    <input type="text" id="client-name" placeholder="Jacqueline Shirumbi" required>
+                    <input type="text" id="client-name" placeholder="Full Name" required>
                 </div>
                 <div class="form-group">
                     <label for="client-phone">Phone Number</label>
@@ -236,7 +305,7 @@
                 <span id="total-price" class="total-amount">KSh 0</span>
             </div>
 
-            <button type="submit" class="submit-btn"><i class="fa-brands fa-whatsapp"></i> Buy / Inquire via WhatsApp</button>
+            <button type="submit" class="submit-btn"><i class="fa-brands fa-whatsapp"></i> Buy / Book via WhatsApp</button>
         </form>
     </section>
 
@@ -293,20 +362,20 @@
             const total = document.getElementById('total-price').innerText;
 
             if (!product) {
-                alert('Please select a product first.');
+                alert('Please select a product or service first.');
                 return;
             }
 
             const rawMessage = `Hello MJ Solutions!\n\n` +
-                `*New Beauty Product Order / Inquiry*\n` +
-                `• *Product:* ${product}\n` +
-                `• *Quantity:* ${quantity}\n` +
-                `• *Fulfillment:* ${delivery}\n` +
+                `*New Order / Booking Request*\n` +
+                `• *Product/Service:* ${product}\n` +
+                `• *Quantity/People:* ${quantity}\n` +
+                `• *Fulfillment/Type:* ${delivery}\n` +
                 `• *Total Price:* ${total}\n\n` +
                 `*Customer Details:*\n` +
                 `• *Name:* ${name}\n` +
                 `• *Phone:* ${phone}\n` +
-                `• *Notes/Address:* ${notes || 'None'}`;
+                `• *Notes/Date/Address:* ${notes || 'None'}`;
 
             const whatsappPhone = "254756295128";
             window.open(`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(rawMessage)}`, '_blank');
