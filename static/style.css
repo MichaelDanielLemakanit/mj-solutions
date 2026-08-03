@@ -632,7 +632,10 @@ input:focus, select:focus, textarea:focus {
     border-radius: 4px;
     font-weight: 600;
 }
-
+.section-sub{
+    margin-bottom: 50px;
+    padding: 0 10px;
+}
 .portfolio-link {
     display: inline-block;
     color: #ffffff;
