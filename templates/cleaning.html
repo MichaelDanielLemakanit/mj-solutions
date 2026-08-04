@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Cleaning & Upholstery Care | MJ Solutions</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Flatpickr Custom Datepicker CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</head>
+<style>
+    /* --- Header Layout Base Fixes --- */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        position: relative;
+        z-index: 1000;
+        background-color: #111111;
+    }
+
+    /* Hide Hamburger Menu Button on Desktop */
+    .menu-toggle {
+        display: none;
+        background: transparent;
+        border: none;
+        color: #ff6600;
+        font-size: 1.8rem;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+
+    /* --- Mobile Screen Responsiveness --- */
+    @media screen and (max-width: 768px) {
+        .menu-toggle {
+            display: block;
+        }
+
+        header nav {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #111111;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+            border-top: 1px solid #222222;
+            padding: 1rem 0;
+        }
+
+        header nav.active {
+            display: flex;
+        }
+
+        header nav a {
+            padding: 0.85rem 2rem;
+            width: 100%;
+            text-align: left;
+            border-bottom: 1px solid #1a1a1a;
+            font-size: 1rem;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        header nav a:last-child {
+            border-bottom: none;
+        }
+    }
+
+    /* --- MJ Solutions Modern Schedule Picker Card Styling --- */
+    .mj-schedule-card {
+        background: #181818;
+        border: 1px solid #2a2a2a;
+        border-radius: 18px;
+        padding: 1.5rem;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+        max-width: 480px;
+        margin: 0 auto;
+        color: #ffffff;
+    }
+
+    .mj-schedule-header {
+        margin-bottom: 1rem;
+    }
+
+    .mj-schedule-header h4 {
+        margin: 0 0 4px 0;
+        font-size: 1.1rem;
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    .mj-schedule-header p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #888888;
+    }
+
+    .mj-picker-controls {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 1.2rem;
+    }
+
+    .mj-picker-box {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: #222222;
+        border: 1px solid #333333;
+        border-radius: 12px;
+        padding: 0 12px;
+        transition: border-color 0.2s;
+    }
+
+    .mj-picker-box:focus-within,
+    .mj-picker-box:hover {
+        border-color: #ff6600;
+    }
+
+    .mj-picker-box i {
+        color: #ff6600;
+        font-size: 0.95rem;
+        margin-right: 8px;
+    }
+
+    .mj-picker-box input,
+    .mj-picker-box select {
+        width: 100%;
+        background: transparent;
+        border: none;
+        color: #ffffff;
+        padding: 10px 0;
+        font-size: 0.9rem;
+        outline: none;
+        cursor: pointer;
+    }
+
+    .mj-picker-box select option {
+        background: #222222;
+        color: #ffffff;
+    }
+
+    /* Modern option highlight workaround */
+    .mj-picker-box select option:hover,
+    .mj-picker-box select option:focus,
+    .mj-picker-box select option:checked {
+        background-color: #ff6600 !important;
+        color: #ffffff !important;
+    }
+
+    .mj-action-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding-top: 10px;
+        border-top: 1px solid #282828;
+    }
+
+    .mj-btn {
+        padding: 8px 18px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .mj-btn-remove {
+        background-color: #2a2a2a;
+        color: #cccccc;
+    }
+
+    .mj-btn-remove:hover {
+        background-color: #383838;
+        color: #ffffff;
+    }
+
+    .mj-btn-done {
+        background-color: #ff6600;
+        color: #ffffff;
+    }
+
+    .mj-btn-done:hover {
+        background-color: #e65c00;
+        box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
+    }
+
+    /* --- Custom Flatpickr Theme (MJ Colors) --- */
+    .flatpickr-calendar {
+        background: #181818 !important;
+        border: 1px solid #333333 !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8) !important;
+        border-radius: 16px !important;
+        font-family: inherit !important;
+        padding: 8px !important;
+    }
+
+    .flatpickr-months .flatpickr-month,
+    .flatpickr-current-month .flatpickr-monthDropdown-months,
+    .flatpickr-months .flatpickr-prev-month,
+    .flatpickr-months .flatpickr-next-month {
+        color: #ffffff !important;
+        fill: #ffffff !important;
+    }
+
+    span.flatpickr-weekday {
+        color: #888888 !important;
+        font-weight: 600 !important;
+    }
+
+    .flatpickr-day {
+        color: #eeeeee !important;
+        border-radius: 50% !important;
+    }
+
+    .flatpickr-day:hover {
+        background: #2a2a2a !important;
+    }
+
+    /* Selected Date (MJ Orange Pill) */
+    .flatpickr-day.selected,
+    .flatpickr-day.selected:hover {
+        background: #ff6600 !important;
+        border-color: #ff6600 !important;
+        color: #ffffff !important;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-badge">MJ</div>
+            <div class="brand-name">
+                <h2>MJ SOLUTIONS</h2>
+                <p>CLEANING & MAINTENANCE SERVICES</p>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Toggle -->
+        <button class="menu-toggle" id="menu-toggle" onclick="toggleMenu()" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <nav id="nav-menu">
+            <a href="{{ url_for('home') }}" onclick="closeMenu()">Home</a>
+            <a href="#cleaning-services" onclick="closeMenu()">Our Services</a>
+            <a href="#service-areas" onclick="closeMenu()">Coverage Areas</a>
+            <a href="#order-form" onclick="closeMenu()">Book Cleaning</a>
+        </nav>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <h1>PROFESSIONAL <span>CLEANING SERVICES</span></h1>
+        <p>Deep house cleaning, seat & sofa extraction shampooing, carpet washing, and vehicle interior detailing.</p>
+    </section>
+
+    <!-- Cleaning Services Section -->
+    <section id="cleaning-services" class="printing-catalog">
+        <h2>Cleaning & Upholstery Care Packages</h2>
+        <div class="catalog-grid">
+
+            <div class="catalog-card" onclick="selectService('Sofa & Seat Deep Shampooing')">
+                <i class="fa-solid fa-couch"></i>
+                <h3>Sofa & Seat Shampooing</h3>
+                <p>Deep stain removal, fabric extraction, foam shampooing, and odor neutralization for 5/7 seater sofas.
+                </p>
+                <span class="price-tag">From KSh 3,500</span>
+                <button class="select-btn">Book Service</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectService('Residential House Deep Cleaning')">
+                <i class="fa-solid fa-house-chimney-crack"></i>
+                <h3>House Deep Cleaning</h3>
+                <p>Comprehensive home cleaning including kitchen degreasing, bathroom scrubbing, floors, and window
+                    panes.</p>
+                <span class="price-tag">From KSh 5,000</span>
+                <button class="select-btn">Book Service</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectService('Carpet & Rug Washing')">
+                <i class="fa-solid fa-rug"></i>
+                <h3>Carpet & Rug Wash</h3>
+                <p>Heavy-duty dirt extraction, deep wet washing, and quick-drying sanitization for living area carpets.
+                </p>
+                <span class="price-tag">From KSh 2,000</span>
+                <button class="select-btn">Book Service</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectService('Mattress Deep Sanitization')">
+                <i class="fa-solid fa-bed"></i>
+                <h3>Mattress Sanitization</h3>
+                <p>Steam cleaning, dust mite removal, allergen treatment, and stain extraction for standard beds.</p>
+                <span class="price-tag">From KSh 2,500</span>
+                <button class="select-btn">Book Service</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectService('Car Interior Detailing')">
+                <i class="fa-solid fa-car-rear"></i>
+                <h3>Vehicle Upholstery Detailing</h3>
+                <p>Car seat shampooing, ceiling steaming, dashboard conditioning, and carpet restoration for personal
+                    cars.</p>
+                <span class="price-tag">From KSh 3,000</span>
+                <button class="select-btn">Book Service</button>
+            </div>
+
+            <div class="catalog-card" onclick="selectService('Move-In / Move-Out Cleaning')">
+                <i class="fa-solid fa-boxes-packing"></i>
+                <h3>Move-In / Move-Out Clean</h3>
+                <p>Post-tenancy deep clean to restore vacant apartments or prepare new houses before moving in.</p>
+                <span class="price-tag">From KSh 6,000</span>
+                <button class="select-btn">Book Service</button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Coverage Areas Section -->
+    <section id="service-areas" class="location-section">
+        <h2>Service Areas & Work Hours</h2>
+        <p class="section-sub">We offer mobile housecalls and commercial cleaning across Nairobi and surrounding
+            regions.</p>
+
+        <div class="location-container">
+            <div class="location-info">
+                <div class="info-block">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <h4>Service Coverage Area</h4>
+                        <p>Nairobi CBD, Ngong Road, Utawala, Kilimani, Westlands, Lavington, Karen, Kasarani, Kiambu Road, Syokimau &
+                            Metropolitan surrounds.</p>
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <i class="fa-solid fa-clock"></i>
+                    <div>
+                        <h4>Working Hours</h4>
+                        <p>Monday – Saturday: 8:30 AM – 6:00 PM<br><span style="color: #ff6600;">Sunday: On Special
+                                Request</span></p>
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <i class="fa-solid fa-headset"></i>
+                    <div>
+                        <h4>Cleaning Hotline & Inquiries</h4>
+                        <p>Phone: 0756295128 / 0717434845<br>Email: michaellemakanit@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-wrapper">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.817282717013!2d36.821946!3d-1.286389!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f10d68f237fef%3A0xb36a04803d15b22b!2sNairobi%20CBD!5e0!3m2!1sen!2ske!4v1700000000000!5m2!1sen!2ske"
+                    width="100%" height="320" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form Section -->
+    <section id="order-form" class="order-section">
+        <h2>Book Cleaning Service via WhatsApp</h2>
+        <form class="order-container" onsubmit="submitCleaningBooking(event)">
+
+            <div class="form-group">
+                <label for="cleaning-type">Selected Service</label>
+                <select id="cleaning-type" required onchange="updateCleaningEstimate()">
+                    <option value="" disabled selected>Select a cleaning service...</option>
+                    <option value="Sofa & Seat Deep Shampooing" data-price="3500">Sofa & Seat Shampooing (From KSh
+                        3,500)</option>
+                    <option value="Residential House Deep Cleaning" data-price="5000">House Deep Cleaning (From KSh
+                        5,000)</option>
+                    <option value="Carpet & Rug Washing" data-price="2000">Carpet & Rug Wash (From KSh 2,000)</option>
+                    <option value="Mattress Deep Sanitization" data-price="2500">Mattress Deep Sanitization (From KSh
+                        2,500)</option>
+                    <option value="Car Interior Detailing" data-price="3000">Vehicle Upholstery Detailing (From KSh
+                        3,000)</option>
+                    <option value="Move-In / Move-Out Cleaning" data-price="6000">Move-In / Move-Out Cleaning (From KSh
+                        6,000)</option>
+                    <option value="Custom Cleaning Request" data-price="0">Other / Commercial Custom Project</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="quantity">Quantity / Room / Seater Count</label>
+                    <input type="number" id="quantity" min="1" value="1" required oninput="updateCleaningEstimate()">
+                </div>
+                <div class="form-group">
+                    <label for="property-type">Property / Item Type</label>
+                    <select id="property-type">
+                        <option value="Residential Apartment / House">Residential Apartment / House</option>
+                        <option value="Office / Commercial Space">Office / Commercial Space</option>
+                        <option value="Vehicle Interior">Vehicle </option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Schedule Appointment Picker -->
+            <div class="form-group" style="width: 100%;">
+                <label>Schedule Preferred Cleaning Date & Time</label>
+                <div class="mj-schedule-card">
+                    <div class="mj-schedule-header">
+                        <h4>Select Service Schedule</h4>
+                        <p>Time Zone: Nairobi, EAT (GMT +03:00)</p>
+                    </div>
+
+                    <div class="mj-picker-controls">
+                        <div class="mj-picker-box">
+                            <i class="fa-regular fa-calendar"></i>
+                            <input type="text" id="booking-date" placeholder="Select Date" required readonly>
+                        </div>
+
+                        <div class="mj-picker-box">
+                            <i class="fa-regular fa-clock"></i>
+                            <select id="booking-time" required>
+                                <option value="08:00 AM">08:00 AM</option>
+                                <option value="09:00 AM">09:00 AM</option>
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="11:00 AM">11:00 AM</option>
+                                <option value="12:00 PM">12:00 PM</option>
+                                <option value="01:00 PM">01:00 PM</option>
+                                <option value="02:00 PM">02:00 PM</option>
+                                <option value="03:00 PM">03:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mj-action-footer">
+                        <button type="button" class="mj-btn mj-btn-remove" onclick="clearSelectedDate()">Remove</button>
+                        <button type="button" class="mj-btn mj-btn-done" onclick="confirmSelectedDate()">Done</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Estate Name, House Number & Special Requirements</label>
+                <textarea id="notes" rows="2"
+                    placeholder="e.g., Ngong road, Race Course Area, Cathy Shelter P27. Heavy stains on living room sofa..."></textarea>
+            </div>
+
+            <hr class="form-divider">
+
+            <h3>Customer Contact Details</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="client-name">Full Name</label>
+                    <input type="text" id="client-name" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="client-phone">Phone Number</label>
+                    <input type="tel" id="client-phone" placeholder="0756295128" required>
+                </div> 
+ 
+            </div>
+            <div class="form-group">
+                <label for="client-email">Email Address</label>
+                <input type="email" id="client-email" placeholder="email@example.com" required>
+            </div>
+
+            <div class="price-summary">
+                <span>Estimated Starting Price:</span>
+                <span id="total-price" class="total-amount">KSh 0</span>
+            </div>
+
+            <button type="submit" class="submit-btn"><i class="fa-brands fa-whatsapp"></i> Request Booking via
+                WhatsApp</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-info">
+            <div class="contact-item">
+                <i class="fa-solid fa-phone"></i>
+                <span>0756295128</span>
+            </div>
+            <div class="contact-item">
+                <i class="fa-solid fa-envelope"></i>
+                <span>michaellemakanit@gmail.com</span>
+            </div>
+            <div class="social-links">
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-tiktok"></i>
+                <span>mj.solutions</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        let calendarInstance = null;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize Flatpickr Custom Datepicker
+            calendarInstance = flatpickr("#booking-date", {
+                dateFormat: "Y-m-d",
+                minDate: "today"
+            });
+        });
+
+        function clearSelectedDate() {
+            if (calendarInstance) {
+                calendarInstance.clear();
+            }
+        }
+
+        function confirmSelectedDate() {
+            if (calendarInstance) {
+                calendarInstance.close();
+            }
+        }
+
+        function toggleMenu() {
+            const nav = document.getElementById('nav-menu');
+            const toggleBtn = document.getElementById('menu-toggle');
+            nav.classList.toggle('active');
+
+            const icon = toggleBtn.querySelector('i');
+            if (nav.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        function closeMenu() {
+            const nav = document.getElementById('nav-menu');
+            const toggleBtn = document.getElementById('menu-toggle');
+            if (nav.classList.contains('active')) {
+                nav.classList.remove('active');
+                const icon = toggleBtn.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        function selectService(serviceName) {
+            const selectElement = document.getElementById('cleaning-type');
+            selectElement.value = serviceName;
+
+            document.getElementById('order-form').scrollIntoView({ behavior: 'smooth' });
+            updateCleaningEstimate();
+        }
+
+        function updateCleaningEstimate() {
+            const selectElement = document.getElementById('cleaning-type');
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const basePrice = selectedOption ? parseFloat(selectedOption.getAttribute('data-price')) || 0 : 0;
+            const quantity = parseInt(document.getElementById('quantity').value) || 1;
+
+            const total = basePrice * quantity;
+            document.getElementById('total-price').innerText = total > 0 ? 'KSh ' + total.toLocaleString() : 'Price on Quote';
+        }
+
+        function submitCleaningBooking(event) {
+            event.preventDefault();
+
+            const service = document.getElementById('cleaning-type').value;
+            const quantity = document.getElementById('quantity').value;
+            const propertyType = document.getElementById('property-type').value;
+            const bookingDate = document.getElementById('booking-date').value;
+            const bookingTime = document.getElementById('booking-time').value;
+            const notes = document.getElementById('notes').value;
+            const name = document.getElementById('client-name').value;
+            const phone = document.getElementById('client-phone').value;
+            const email = document.getElementById('client-email').value;
+            const total = document.getElementById('total-price').innerText;
+
+            if (!service) {
+                alert('Please select a cleaning service first.');
+                return;
+            }
+
+            const rawMessage = `Hello MJ Solutions!\n\n` +
+                `*New Cleaning Service Booking Request*\n` +
+                `• *Service Requested:* ${service}\n` +
+                `• *Count/Quantity:* ${quantity}\n` +
+                `• *Property Type:* ${propertyType}\n` +
+                `• *Scheduled Date:* ${bookingDate}\n` +
+                `• *Scheduled Time:* ${bookingTime}\n` +
+                `• *Estimated Cost:* ${total}\n\n` +
+                `*Customer Details:*\n` +
+                `• *Name:* ${name}\n` +
+                `• *Phone:* ${phone}\n` +
+                `• *Email:* ${email}\n` +
+                `• *Location Details/Notes:* ${notes || 'None'}`;
+
+            const whatsappPhone = "254756295128";
+            window.open(`https://wa.me/${whatsappPhone}?text=${encodeURIComponent(rawMessage)}`, '_blank');
+        }
+    </script>
+</body>
+
+</html>

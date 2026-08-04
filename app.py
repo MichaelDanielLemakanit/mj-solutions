@@ -27,6 +27,10 @@ def printing():
 def software():
     return render_template("software.html")
 
+# cleaning route
+@app.route("/cleaning")
+def cleaning():
+    return render_template("cleaning.html")
 
 # Dynamic Route Example (e.g., user profiles)
 @app.route("/user/<username>")
