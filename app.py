@@ -32,6 +32,12 @@ def software():
 def cleaning():
     return render_template("cleaning.html")
 
+# custom_picture route
+@app.route("/custom_picture.")
+def custom_picture():
+    return render_template("custom_picture.html")
+    
+
 # Dynamic Route Example (e.g., user profiles)
 @app.route("/user/<username>")
 def user_profile(username):

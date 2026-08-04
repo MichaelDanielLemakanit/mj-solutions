@@ -13,229 +13,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
-<style>
-    /* --- Header Layout Base Fixes --- */
-    header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-        position: relative;
-        z-index: 1000;
-        background-color: #111111;
-    }
-
-    /* Hide Hamburger Menu Button on Desktop */
-    .menu-toggle {
-        display: none;
-        background: transparent;
-        border: none;
-        color: #ff6600;
-        font-size: 1.8rem;
-        cursor: pointer;
-        padding: 0.5rem;
-    }
-
-    /* --- Mobile Screen Responsiveness --- */
-    @media screen and (max-width: 768px) {
-        .menu-toggle {
-            display: block;
-        }
-
-        header nav {
-            display: none;
-            flex-direction: column;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            background-color: #111111;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
-            border-top: 1px solid #222222;
-            padding: 1rem 0;
-        }
-
-        header nav.active {
-            display: flex;
-        }
-
-        header nav a {
-            padding: 0.85rem 2rem;
-            width: 100%;
-            text-align: left;
-            border-bottom: 1px solid #1a1a1a;
-            font-size: 1rem;
-            color: #ffffff;
-            text-decoration: none;
-        }
-
-        header nav a:last-child {
-            border-bottom: none;
-        }
-    }
-
-    /* --- MJ Solutions Modern Picker Card Styling --- */
-    .mj-schedule-card {
-        background: #181818;
-        border: 1px solid #2a2a2a;
-        border-radius: 18px;
-        padding: 1.5rem;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
-        max-width: 480px;
-        margin: 0 auto;
-        color: #ffffff;
-    }
-
-    .mj-schedule-header {
-        margin-bottom: 1rem;
-    }
-
-    .mj-schedule-header h4 {
-        margin: 0 0 4px 0;
-        font-size: 1.1rem;
-        color: #ffffff;
-        font-weight: 600;
-    }
-
-    .mj-schedule-header p {
-        margin: 0;
-        font-size: 0.85rem;
-        color: #888888;
-    }
-
-    .mj-picker-controls {
-        display: flex;
-        gap: 12px;
-        margin-bottom: 1.2rem;
-    }
-
-    .mj-picker-box {
-        flex: 1;
-        position: relative;
-        display: flex;
-        align-items: center;
-        background: #222222;
-        border: 1px solid #333333;
-        border-radius: 12px;
-        padding: 0 12px;
-        transition: border-color 0.2s;
-    }
-
-    .mj-picker-box:focus-within, .mj-picker-box:hover {
-        border-color: #ff6600;
-    }
-
-    .mj-picker-box i {
-        color: #ff6600;
-        font-size: 0.95rem;
-        margin-right: 8px;
-    }
-
-    .mj-picker-box input, .mj-picker-box select {
-        width: 100%;
-        background: transparent;
-        border: none;
-        color: #ffffff;
-        padding: 10px 0;
-        font-size: 0.9rem;
-        outline: none;
-        cursor: pointer;
-    }
-
-    .mj-picker-box select option {
-        background: #2a2a2a;
-        color: #ffffff;
-    }
-
-    .mj-action-footer {
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        padding-top: 10px;
-        border-top: 1px solid #282828;
-    }
-
-    .mj-btn {
-        padding: 8px 18px;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        border: none;
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-
-    .mj-btn-remove {
-        background-color: #2a2a2a;
-        color: #cccccc;
-    }
-
-    .mj-btn-remove:hover {
-        background-color: #383838;
-        color: #ffffff;
-    }
-
-    .mj-btn-done {
-        background-color: #ff6600;
-        color: #ffffff;
-    }
-
-    .mj-btn-done:hover {
-        background-color: #e65c00;
-        box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
-    }
-
-    /* --- Custom Flatpickr Theme (MJ Colors) --- */
-    .flatpickr-calendar {
-        background: #181818 !important;
-        border: 1px solid #333333 !important;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8) !important;
-        border-radius: 16px !important;
-        font-family: inherit !important;
-        padding: 8px !important;
-    }
-
-    .flatpickr-months .flatpickr-month,
-    .flatpickr-current-month .flatpickr-monthDropdown-months,
-    .flatpickr-months .flatpickr-prev-month, 
-    .flatpickr-months .flatpickr-next-month {
-        color: #ffffff !important;
-        fill: #ffffff !important;
-    }
-
-    span.flatpickr-weekday {
-        color: #888888 !important;
-        font-weight: 600 !important;
-    }
-
-    .flatpickr-day {
-        color: #eeeeee !important;
-        border-radius: 50% !important;
-    }
-
-    .flatpickr-day:hover {
-        background: #2a2a2a !important;
-    }
-
-    /* Sunday / Monday Closed Styling */
-    .flatpickr-day.flatpickr-disabled, 
-    .flatpickr-day.flatpickr-disabled:hover {
-        color: #444444 !important;
-        background: transparent !important;
-        text-decoration: line-through;
-        opacity: 0.3;
-        cursor: not-allowed !important;
-    }
-
-    /* Selected Date (MJ Orange Pill) */
-    .flatpickr-day.selected, 
-    .flatpickr-day.selected:hover {
-        background: #ff6600 !important;
-        border-color: #ff6600 !important;
-        color: #ffffff !important;
-        font-weight: bold;
-    }
-</style>
 
 <body>
 
@@ -448,7 +225,8 @@
                     <i class="fa-solid fa-clock"></i>
                     <div>
                         <h4>Working Hours</h4>
-                        <p>Tuesday – Friday: 8:00 AM – 6:30 PM<br><span style="color: #ff6600;">Sunday & Saturday: Closed</span></p>
+                        <p>Monday – Friday: 8:00 AM – 6:30 PM<br><span style="color: #ff6600;">Sunday & Saturday:
+                                Closed</span></p>
                     </div>
                 </div>
 
@@ -485,22 +263,35 @@
                 <select id="product-type" required onchange="handleProductSelection()">
                     <option value="" disabled selected>Select a product or service from above</option>
                     <optgroup label="Beauty Devices & Products">
-                        <option value="Sonic Facial Cleanser" data-price="2500" data-type="product">Sonic Facial Cleanser (KSh 2,500)</option>
-                        <option value="LED Facial Therapy Mask" data-price="6500" data-type="product">LED Facial Therapy Mask (KSh 6,500)</option>
-                        <option value="Ultrasonic Skin Scrubber" data-price="3200" data-type="product">Ultrasonic Skin Scrubber (KSh 3,200)</option>
-                        <option value="Pro Hair Trimmer Set" data-price="3800" data-type="product">Pro Hair Trimmer Set (KSh 3,800)</option>
-                        <option value="Laser IPL Hair Remover" data-price="8500" data-type="product">Laser IPL Hair Remover (KSh 8,500)</option>
-                        <option value="Multifunctional Hair Styler" data-price="4200" data-type="product">Multifunctional Hair Styler (KSh 4,200)</option>
+                        <option value="Sonic Facial Cleanser" data-price="2500" data-type="product">Sonic Facial
+                            Cleanser (KSh 2,500)</option>
+                        <option value="LED Facial Therapy Mask" data-price="6500" data-type="product">LED Facial Therapy
+                            Mask (KSh 6,500)</option>
+                        <option value="Ultrasonic Skin Scrubber" data-price="3200" data-type="product">Ultrasonic Skin
+                            Scrubber (KSh 3,200)</option>
+                        <option value="Pro Hair Trimmer Set" data-price="3800" data-type="product">Pro Hair Trimmer Set
+                            (KSh 3,800)</option>
+                        <option value="Laser IPL Hair Remover" data-price="8500" data-type="product">Laser IPL Hair
+                            Remover (KSh 8,500)</option>
+                        <option value="Multifunctional Hair Styler" data-price="4200" data-type="product">
+                            Multifunctional Hair Styler (KSh 4,200)</option>
                     </optgroup>
                     <optgroup label="Makeup & Artist Services">
-                        <option value="Soft Glam Full Face Makeup" data-price="3000" data-type="service">Soft Glam Full Face (KSh 3,000)</option>
-                        <option value="Full Studio & Event Glam Makeup" data-price="4500" data-type="service">Full Studio & Event Glam (KSh 4,500)</option>
-                        <option value="Bridal Glam Package (Bride)" data-price="12000" data-type="service">Bridal Glam Package (KSh 12,000)</option>
-                        <option value="Bridesmaids & Squad Makeup" data-price="3500" data-type="service">Bridesmaids & Squad Makeup (KSh 3,500/person)</option>
-                        <option value="Editorial & Photoshoot Makeup" data-price="5000" data-type="service">Editorial & Photoshoot Makeup (KSh 5,000)</option>
-                        <option value="1-on-1 Personal Makeup Masterclass" data-price="7500" data-type="service">1-on-1 Makeup Masterclass (KSh 7,500)</option>
+                        <option value="Soft Glam Full Face Makeup" data-price="3000" data-type="service">Soft Glam Full
+                            Face (KSh 3,000)</option>
+                        <option value="Full Studio & Event Glam Makeup" data-price="4500" data-type="service">Full
+                            Studio & Event Glam (KSh 4,500)</option>
+                        <option value="Bridal Glam Package (Bride)" data-price="12000" data-type="service">Bridal Glam
+                            Package (KSh 12,000)</option>
+                        <option value="Bridesmaids & Squad Makeup" data-price="3500" data-type="service">Bridesmaids &
+                            Squad Makeup (KSh 3,500/person)</option>
+                        <option value="Editorial & Photoshoot Makeup" data-price="5000" data-type="service">Editorial &
+                            Photoshoot Makeup (KSh 5,000)</option>
+                        <option value="1-on-1 Personal Makeup Masterclass" data-price="7500" data-type="service">1-on-1
+                            Makeup Masterclass (KSh 7,500)</option>
                     </optgroup>
-                    <option value="Other Custom Inquiry" data-price="0" data-type="custom">Other / Custom Product or Service Inquiry</option>
+                    <option value="Other Custom Inquiry" data-price="0" data-type="custom">Other / Custom Product or
+                        Service Inquiry</option>
                 </select>
             </div>
 
@@ -563,7 +354,8 @@
 
             <div class="form-group">
                 <label for="notes">Additional Details / Location Notes</label>
-                <textarea id="notes" rows="2" placeholder="Housecall address, skin preferences, or additional details..."></textarea>
+                <textarea id="notes" rows="2"
+                    placeholder="Housecall address, skin preferences, or additional details..."></textarea>
             </div>
 
             <hr class="form-divider">
@@ -585,7 +377,8 @@
                 <span id="total-price" class="total-amount">KSh 0</span>
             </div>
 
-            <button type="submit" class="submit-btn"><i class="fa-brands fa-whatsapp"></i> Buy / Book via WhatsApp</button>
+            <button type="submit" class="submit-btn"><i class="fa-brands fa-whatsapp"></i> Buy / Book via
+                WhatsApp</button>
         </form>
     </section>
 
@@ -594,7 +387,7 @@
         <div class="footer-info">
             <div class="contact-item">
                 <i class="fa-solid fa-phone"></i>
-                <span>0756295128</span>
+                <span>07 562 915 128</span>
             </div>
             <div class="contact-item">
                 <i class="fa-solid fa-envelope"></i>
@@ -735,7 +528,7 @@
             let appointmentInfo = '';
             if (itemType === 'service' && bookingDate) {
                 appointmentInfo = `• *Preferred Date:* ${bookingDate}\n` +
-                                  `• *Preferred Time:* ${bookingTime}\n`;
+                    `• *Preferred Time:* ${bookingTime}\n`;
             }
 
             const rawMessage = `Hello MJ Solutions!\n\n` +
