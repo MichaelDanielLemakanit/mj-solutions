@@ -24,8 +24,8 @@
         </div>
         <nav>
             <a href="#home">Home</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
+            <a href="#services" onclick="scrollToSection('services')">Services</a>
+            <a href="#contact" onclick="scrollToSection('contact')">Contact</a>
         </nav>
     </header>
 
@@ -86,18 +86,18 @@
                     <p>Tailored cross-platform mobile apps to streamline and grow your modern business network.</p>
                 </div>
             </a>
-            <a href="{{ url_for('cleaning') }}" style="text-decoration: none; color: inherit;">
-                <div class="service-card">
-                    <i class="fa-solid fa-broom"></i>
-                    <h3>Cleaning & House Care</h3>
-                    <p>Professional deep cleaning, sofa & seat shampooing, carpet washing, and residential care.</p>
-                </div>
-            </a>
             <a href="{{ url_for('custom_picture') }}" style="text-decoration: none; color: inherit;">
                 <div class="service-card">
                     <i class="fa-solid fa-image"></i>
                     <h3>Custom Photo Mounting and Picture Framing Services</h3>
                     <p>Transforming digital photos and personal memories into canvas prints, wall art mounts, and framed prints for display</p>
+                </div>
+            </a>
+            <a href="{{ url_for('cleaning') }}" style="text-decoration: none; color: inherit;">
+                <div class="service-card">
+                    <i class="fa-solid fa-broom"></i>
+                    <h3>Cleaning & House Care</h3>
+                    <p>Professional deep cleaning, sofa & seat shampooing, carpet washing, and residential care.</p>
                 </div>
             </a>
         </div>
